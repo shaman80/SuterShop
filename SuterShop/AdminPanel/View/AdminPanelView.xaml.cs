@@ -205,12 +205,6 @@ namespace SuterShop.AdminPanel.View
                     break;
                 }
             }
-
-            
-
-            
-            // TODO Доделать!
-
         }
 
         private void OpenFileDialogImage(object sender, RoutedEventArgs e)
