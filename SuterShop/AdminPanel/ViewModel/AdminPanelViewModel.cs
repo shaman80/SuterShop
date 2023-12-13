@@ -95,11 +95,6 @@ namespace SuterShop.AdminPanel.ViewModel
             (Application.Current as IApp).GoodItemChanged?.Invoke(goods);
         }
 
-        internal void TestFunction()
-        {
-
-        }
     }
-
 
 }
