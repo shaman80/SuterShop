@@ -60,7 +60,7 @@ namespace SuterShop.card.view
 
         private void DeleteGoodItem(object sender, RoutedEventArgs e)
         {
-            //delete
+            //deleteFunc
         }
 
         private void RightButtonClick(object sender, MouseButtonEventArgs e)
