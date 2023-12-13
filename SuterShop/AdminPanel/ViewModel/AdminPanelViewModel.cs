@@ -94,6 +94,11 @@ namespace SuterShop.AdminPanel.ViewModel
             _db.SaveChanges();
             (Application.Current as IApp).GoodItemChanged?.Invoke(goods);
         }
+
+        internal void TestFunction()
+        {
+
+        }
     }
 
 
