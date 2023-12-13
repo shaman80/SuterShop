@@ -27,7 +27,7 @@ namespace SuterShop.ViewModel
             bottomPanel = new Label { Content = " Нижняя панель" };
         }
 
-        internal void ShowPushProduct()
+        internal void ShowPushProduct() //какая-то интересная функция, но над ней еще надо поработать
         {
           //  var window = new PushProduct();
           //  window.ShowDialog();
