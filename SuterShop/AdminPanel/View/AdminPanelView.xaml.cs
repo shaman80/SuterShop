@@ -216,6 +216,8 @@ namespace SuterShop.AdminPanel.View
                 Image.Text = openFileDialog.FileName;
             }
         }
-        // А это мой комментарий.
+
+        //zxc.
+
     }
 }
