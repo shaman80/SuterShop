@@ -60,7 +60,7 @@ namespace SuterShop.card.view
 
         private void DeleteGoodItem(object sender, RoutedEventArgs e)
         {
-
+            //delete
         }
 
         private void RightButtonClick(object sender, MouseButtonEventArgs e)
@@ -86,7 +86,7 @@ namespace SuterShop.card.view
             if((Application.Current as IApp).CurrentUser is Seller)
             {
                 // TODO! доделать удаление карточки товара.
-
+                
             }
 
         }
