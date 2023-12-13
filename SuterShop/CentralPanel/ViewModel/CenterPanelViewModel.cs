@@ -26,6 +26,7 @@ namespace SuterShop.CentralPanel.View
         internal void SetData()
         {
             _db = (Application.Current as IApp).Db;
+            var goods1 = _db.GoodsList.ToList();
             var goods = _db.GoodsForSaleList.ToList();
 
             // Получаем папку куда пользователь установил нашу программу.

@@ -1,19 +1,8 @@
 ﻿using SuterShop.AdminPanel.View;
 using SuterShop.card.viewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SuterShop.card.view
 {
@@ -30,7 +19,7 @@ namespace SuterShop.card.view
 
         private void UserIsLogining(User user)
         {
-            if (user is Seller)
+            if (user.Status == Statuses.Seller)
             {
                 EditGoodsItem.Visibility = Visibility.Visible;
             }
@@ -66,6 +55,8 @@ namespace SuterShop.card.view
         private void RightButtonClick(object sender, MouseButtonEventArgs e)
         {
             var image = (sender as Image);
+            var goodForSale = (image.DataContext as cardViewModel).Good;
+
             image.ContextMenu = new ContextMenu();
             var menuItem = new MenuItem
             {
@@ -83,8 +74,9 @@ namespace SuterShop.card.view
 
             image.ContextMenu.Items.Add(new Separator());
 
-            if((Application.Current as IApp).CurrentUser is Seller)
+            if((Application.Current as IApp).CurrentUser?.Status == Statuses.Seller)
             {
+
                 // TODO! доделать удаление карточки товара.
                 
             }
