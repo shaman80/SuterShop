@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="SuterShop.LeftPanel.View.LeftPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SuterShop.LeftPanel.View" xmlns:viewmodel="clr-namespace:SuterShop.LeftPanel.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodel:LeftPanelViewModel/>
+    </UserControl.DataContext>
+    <StackPanel Orientation="Vertical">
+        <ItemsControl ItemsSource="{Binding Categoryes, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Width="150" Text="{Binding Name}" MouseDown="Click" Background="#FFFFFF"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </StackPanel>
+</UserControl>
