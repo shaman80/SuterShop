@@ -216,6 +216,7 @@ namespace SuterShop.AdminPanel.View
                 Image.Text = openFileDialog.FileName;
             }
         }
-
+        //как это все запомнить?!
     }
 }
+
