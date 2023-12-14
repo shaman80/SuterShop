@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using SuterShop.card.view;
 using SuterShop.card.viewModel;
 using System;
@@ -26,9 +27,9 @@ namespace SuterShop.CentralPanel.View
         internal void SetData()
         {
             _db = (Application.Current as IApp).Db;
-            var goods1 = _db.GoodsList.ToList();
-            var goods = _db.GoodsForSaleList.ToList();
 
+            var goods1 = _db.GoodsList.Include("User").ToList();
+            var goods = _db.GoodsForSaleList.Include("User").ToList();
             // Получаем папку куда пользователь установил нашу программу.
             var dir = $"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}TempImages{System.IO.Path.DirectorySeparatorChar}";
 
