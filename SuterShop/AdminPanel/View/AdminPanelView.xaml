@@ -14,15 +14,6 @@
         <viewmodel:AdminPanelViewModel/>
     </Window.DataContext>
     <Grid>
-        <Border Name="loginPanel" Visibility="Visible" BorderBrush="DarkGray" BorderThickness="1" Width="250" Height="150">
-            <StackPanel Background="AntiqueWhite" Orientation="Vertical" >
-                <TextBlock  Text="Логин" Margin="5,5,5,0"/>
-                <TextBox Name="userLogin" Margin="5"/>
-                <TextBlock Text="Пароль" Margin="5,5,5,0"/>
-                <TextBox Name="userPassword" Margin="5,5,5,15"/>
-                <Button Click="Logining" Content="Войти" Margin="5"></Button>
-            </StackPanel>
-        </Border>
         <StackPanel Name="adminPanel" Visibility="Hidden" Orientation="Vertical">
             <TabControl>
                 <TabItem>

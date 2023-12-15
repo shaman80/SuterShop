@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -15,6 +16,10 @@ namespace SuterShop
     public partial class App : Application, IApp
     {
         private User currentUser;
+
+        private Timer _timer;
+        private int _countGoods;
+
         public User CurrentUser
         {
             get => currentUser;
@@ -31,6 +36,9 @@ namespace SuterShop
 
         public delegate void UpdateCardDelegate(GoodsForSale goodsForSale);
         public UpdateCardDelegate GoodItemChanged { get; set; }
+
+        public delegate void UpdateShopDelegate();
+        public UpdateShopDelegate GoodItemCountChanged { get; set; }
         public App()
         {
             var cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
@@ -38,7 +46,19 @@ namespace SuterShop
            // Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
             CreateDefaultAdmin();
+            Thread.Sleep(1000);
+            _timer = new Timer(TimerTick, null,0, 3000);
+          
+        }
 
+        private void TimerTick(object? state)
+        {
+            var countGoods = Db.GoodsForSaleList.Count();
+            if (_countGoods != countGoods)
+            {
+                GoodItemCountChanged?.Invoke();
+            };
+            _countGoods = countGoods;
         }
 
         private void CreateDefaultAdmin()

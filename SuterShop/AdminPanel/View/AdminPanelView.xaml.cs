@@ -25,45 +25,28 @@ namespace SuterShop.AdminPanel.View
         private void TestCurrentUser()
         {
             if((Application.Current as IApp).CurrentUser == null) return;
-
             if ((Application.Current as IApp).CurrentUser.Status == Statuses.Admin)
             {
                 adminPanel.Visibility = Visibility.Visible;
                 sellerPanel.Visibility = Visibility.Hidden;
-                loginPanel.Visibility = Visibility.Hidden;
                 LoadSellers();
                 LoadCategoryes();
             }else if ((Application.Current as IApp)!.CurrentUser.Status == Statuses.Seller)
             {
                 adminPanel.Visibility = Visibility.Hidden;
                 sellerPanel.Visibility = Visibility.Visible;
-                loginPanel.Visibility = Visibility.Hidden;
                 LoadCategoryes();
             }
             else
             {
                 adminPanel.Visibility = Visibility.Hidden;
                 sellerPanel.Visibility = Visibility.Hidden;
-                loginPanel.Visibility = Visibility.Visible;
             }
         }
 
 
 
-        private void Logining(object sender, RoutedEventArgs e)
-        {
-            var db = (Application.Current as IApp).Db;
-            var users = db.Users.ToList();
-            foreach (var user in users)
-            {
-                if(user.Login == userLogin.Text && user.Password == userPassword.Text)
-                {
-                    (Application.Current as IApp)!.CurrentUser = user;
-                    TestCurrentUser();
-                    return;
-                }
-            }
-        }
+
 
 
         private void AddNewSeller(object sender, RoutedEventArgs e)

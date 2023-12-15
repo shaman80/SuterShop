@@ -20,7 +20,7 @@ namespace SuterShop.card.view
 
         private void UserIsLogining(User user)
         {
-            if (user.Status == Statuses.Seller)
+            if (user?.Status == Statuses.Seller)
             {
                 EditGoodsItem.Visibility = Visibility.Visible;
             }
@@ -52,6 +52,7 @@ namespace SuterShop.card.view
         private void DeleteGoodItem(GoodsForSale goodForSale)
         {
             (DataContext as cardViewModel)!.DeleteGoodItem(goodForSale);
+            (VisualParent as WrapPanel).Children.Remove(this);
         }
 
         private void RightButtonClick(object sender, MouseButtonEventArgs e)

@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SuterShop.CentralPanel.View
 {
@@ -22,11 +24,21 @@ namespace SuterShop.CentralPanel.View
 
         public CenterPanelViewModel()
         {
-
+            (Application.Current as IApp).GoodItemCountChanged += GoodItemCountChanged;
         }
+
+        private void GoodItemCountChanged()
+        {
+            Application.Current.Dispatcher.Invoke(() => { 
+                SetData(); 
+            });
+        }
+
         internal void SetData()
         {
             _db = (Application.Current as IApp).Db;
+            _db.Database.CloseConnection();
+            _db.Database.OpenConnection();
             var goods = _db.GoodsForSaleList.Include("User").ToList();
             // Получаем папку куда пользователь установил нашу программу.
             var dir = $"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}TempImages{System.IO.Path.DirectorySeparatorChar}";
@@ -35,7 +47,7 @@ namespace SuterShop.CentralPanel.View
             {
                 Directory.CreateDirectory(dir);
             }
-
+            CentralWrapPanel.Children.Clear();
             foreach (var good in goods)
             {
                 var fileName = $"{good.Id}_{good.Name}.png";

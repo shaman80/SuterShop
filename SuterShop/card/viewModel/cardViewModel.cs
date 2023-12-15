@@ -39,6 +39,7 @@ namespace SuterShop.card.viewModel
         internal void DeleteGoodItem(GoodsForSale goodForSale)
         {
             _goods.Remove(goodForSale);
+            _db.GoodsForSaleList.Remove(goodForSale);
             _db.SaveChanges();
         }
     }

@@ -28,14 +28,22 @@
                     Width="100" 
                     HorizontalAlignment="Right" 
                     Content="Вход"
-                    Click="OpenAdminPanel"/>
-            <Button Margin="5"
-                    Name="logoutBtn"
-                    Visibility="Hidden"
+                    Name="LoginingBtn"
+                    Click="Logining"/>
+            <Button Margin="5,5,150,5" 
                     Width="100" 
+                    Visibility="Hidden"
+                    Name="LogoutBtn"
                     HorizontalAlignment="Right" 
                     Content="Выход"
                     Click="Logout"/>
+            <Button Margin="5"
+                    Name="OpenAdminPanelBtn"
+                    Visibility="Hidden"
+                    Width="100" 
+                    HorizontalAlignment="Right" 
+                    Content="Личный кабинет"
+                    Click="OpenAdminPanel"/>
         </Grid>
         <UserControl Grid.Column="0" 
                      Grid.Row="1" 
