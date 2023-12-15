@@ -85,6 +85,16 @@ namespace SuterShop.card.view
 
             if((Application.Current as IApp).CurrentUser is Seller)
             {
+                goodItem = ((sender as Image).DataContext as cardViewModel).Good;
+                if ((Application.Current as IApp).CurrentUser.Id == goodItem?.Seller.Id)
+                {
+                    menuItem = new MenuItem
+                    {
+                        Header = "Удалить товар",
+                    };
+                    menuItem.Click += DeleteGoodItem;
+                    image.ContextMenu.Items.Add(menuItem);
+                } 
                 // TODO! доделать удаление карточки товара.
                 
             }
