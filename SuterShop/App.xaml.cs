@@ -35,7 +35,7 @@ namespace SuterShop
         {
             var cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(cs);
-            //Db.Database.EnsureDeleted();
+           // Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
             CreateDefaultAdmin();
 

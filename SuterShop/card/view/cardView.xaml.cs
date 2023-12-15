@@ -1,5 +1,6 @@
 ﻿using SuterShop.AdminPanel.View;
 using SuterShop.card.viewModel;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -47,9 +48,10 @@ namespace SuterShop.card.view
 
         }
 
-        private void DeleteGoodItem(object sender, RoutedEventArgs e)
+
+        private void DeleteGoodItem(GoodsForSale goodForSale)
         {
-            //deleteFunc
+            (DataContext as cardViewModel)!.DeleteGoodItem(goodForSale);
         }
 
         private void RightButtonClick(object sender, MouseButtonEventArgs e)
@@ -74,14 +76,27 @@ namespace SuterShop.card.view
 
             image.ContextMenu.Items.Add(new Separator());
 
-            if((Application.Current as IApp).CurrentUser?.Status == Statuses.Seller)
+            var currentUser = (Application.Current as IApp).CurrentUser;
+            if (currentUser?.Status == Statuses.Seller)
             {
-
+                if(goodForSale.User.Id == currentUser.Id)
+                {
+                    menuItem = new MenuItem
+                    {
+                        Header = "Удалить товар",
+                        Tag = goodForSale,
+                    };
+                    menuItem.Click += (_,_) => {
+                        DeleteGoodItem(goodForSale);
+                    };
+                    image.ContextMenu.Items.Add(menuItem);
+                }
                 // TODO! доделать удаление карточки товара.
                 
             }
 
         }
+
 
     }
 }
