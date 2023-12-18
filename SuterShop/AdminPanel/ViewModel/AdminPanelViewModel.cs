@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static SuterShop.App;
 
 namespace SuterShop.AdminPanel.ViewModel
 {
@@ -16,9 +17,25 @@ namespace SuterShop.AdminPanel.ViewModel
         [ObservableProperty] private User user;
         [ObservableProperty] private ObservableCollection<Category> categories;
         [ObservableProperty] private ObservableCollection<User> sellers;
+        [ObservableProperty] private ObservableCollection<GoodsForSale> goodsForSale;
+        private List<GoodsForSale> _goodsForSale;
+
         public AdminPanelViewModel()
         {
             _db = (Application.Current as IApp).Db;
+            LoadGoods();
+        }
+
+        internal void LoadGoods()//загружаем в личный кабинет продавца, выводим список товаров
+        {
+            GoodsForSale = new ObservableCollection<GoodsForSale>();
+            _goodsForSale = null;
+            _goodsForSale = _db.GoodsForSaleList.ToList();
+            foreach (var good in _goodsForSale)
+            {
+                if ((Application.Current as IApp)!.CurrentUser.Login != good.User.Login) continue;
+                GoodsForSale.Add(good);
+            }
         }
 
         internal void AddNewSeller(User seller)
@@ -87,15 +104,30 @@ namespace SuterShop.AdminPanel.ViewModel
         {
             _db.GoodsForSaleList.Add(goods);
             _db.SaveChanges();
+            LoadGoods();
         }
 
+        private void GoodItemForSaleAdd(GoodsForSale goodsForSaleAdd)
+        {
+            GoodsForSale = null; 
+            GoodsForSale.Add(goodsForSaleAdd);
+        }
+       
         internal void EditGoodsItem(GoodsForSale goods)
         {
             _db.GoodsForSaleList.Update(goods);
             _db.SaveChanges();
             (Application.Current as IApp).GoodItemChanged?.Invoke(goods);
+           // LoadGoods();
         }
 
+        internal void DeleteGoodItem(GoodsForSale? deleteGoodsItem)//Удаление товара в личном кабинете продавца
+        {
+            GoodsForSale.Remove(deleteGoodsItem);
+            _db.GoodsForSaleList.Remove(deleteGoodsItem);
+            _db.SaveChanges();
+            LoadGoods();
+        }
     }
 
 }

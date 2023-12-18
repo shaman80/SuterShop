@@ -39,15 +39,18 @@ namespace SuterShop
 
         public delegate void UpdateShopDelegate();
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
+
         public App()
         {
-            var cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
+            //var cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
+            var cs = "Server=localhost;Database=shop;Uid=root;Pwd=1q2w3e;";
+
             Db = new DataBaseContext(cs);
-           // Db.Database.EnsureDeleted();
+            //Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
             CreateDefaultAdmin();
-            Thread.Sleep(1000);
-            _timer = new Timer(TimerTick, null,0, 3000);
+            //Thread.Sleep(1000);
+            //_timer = new Timer(TimerTick, null,0, 3000);
           
         }
 

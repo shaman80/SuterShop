@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SuterShop.AdminPanel.ViewModel;
+using SuterShop.card.viewModel;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -36,6 +37,7 @@ namespace SuterShop.AdminPanel.View
                 adminPanel.Visibility = Visibility.Hidden;
                 sellerPanel.Visibility = Visibility.Visible;
                 LoadCategoryes();
+                LoadGoods();
             }
             else
             {
@@ -43,10 +45,6 @@ namespace SuterShop.AdminPanel.View
                 sellerPanel.Visibility = Visibility.Hidden;
             }
         }
-
-
-
-
 
 
         private void AddNewSeller(object sender, RoutedEventArgs e)
@@ -80,6 +78,11 @@ namespace SuterShop.AdminPanel.View
             (DataContext as AdminPanelViewModel).LoadSellers();
         }
 
+        private void LoadGoods()
+        {
+            (DataContext as AdminPanelViewModel).LoadGoods();
+        }
+
         private void DeleteCategory(object sender, RoutedEventArgs e)
         {
             (sender as Button).IsEnabled = false;
@@ -105,7 +108,7 @@ namespace SuterShop.AdminPanel.View
 
         private void AddNewOrEditGoodsItem(object sender, RoutedEventArgs e)
         {
-            if(_goodItem != null)
+            if (_goodItem != null)
             {
                 EditGoodsItem();
             }
@@ -151,6 +154,13 @@ namespace SuterShop.AdminPanel.View
                 User = (Application.Current as IApp)!.CurrentUser
             };
             (DataContext as AdminPanelViewModel).AddNewGoodsItem(goods);
+            
+            GoodsName.Text = String.Empty;
+            GoodsDescription.Text = String.Empty;
+            GoodsCount.Text = String.Empty;
+            GoodsPrice.Text = String.Empty;
+            GoodsCount.Text = String.Empty;
+            Image.Text = String.Empty;
         }
 
         internal void OpenEditGoodsItem(GoodsForSale goodItem)
@@ -177,6 +187,7 @@ namespace SuterShop.AdminPanel.View
                     break;
                 }
             }
+           
         }
 
         private void OpenFileDialogImage(object sender, RoutedEventArgs e)
@@ -187,6 +198,12 @@ namespace SuterShop.AdminPanel.View
             {
                 Image.Text = openFileDialog.FileName;
             }
+        }
+
+        private void DeleteGoodsItem(object sender, RoutedEventArgs e)
+        {
+            var deleteGoodsItem = (sender as Button).DataContext as GoodsForSale;
+            (DataContext as AdminPanelViewModel).DeleteGoodItem(deleteGoodsItem);
         }
         //zxc!!!
 

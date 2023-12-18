@@ -83,6 +83,31 @@
                     <TabItem.Header>
                         <TextBlock Text="Список товаров" Margin="5"/>
                     </TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5" Width="150" Text="Name"/>
+                            <TextBlock Margin="5" Width="150" Text="Description"/>
+                            <TextBlock Margin="5" Width="100" Text="Category.Name"/>
+                            <TextBlock Margin="5" Width="100" Text="Price"/>
+                            <TextBlock Margin="5" Width="100" Text="Count"/>
+                            <TextBlock Margin="5" Width="100" Text="User"/>
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding GoodsForSale, UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5" Width="150" Text="{Binding Name }"/>
+                                        <TextBlock Margin="5" Width="150" Text="{Binding Description}"/>
+                                        <TextBlock Margin="5" Width="100" Text="{Binding Category.Name}"/>
+                                        <TextBlock Margin="5" Width="100" Text="{Binding Price}"/>
+                                        <TextBlock Margin="5" Width="100" Text="{Binding Count}"/>
+                                        <TextBlock Margin="5" Width="100" Text="{Binding User.Login}"/>
+                                        <Button Margin="5" Width="24" Height="24" Content="Х" Click="DeleteGoodsItem" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
                 </TabItem>
                 <TabItem IsSelected="True">
                     <TabItem.Header>
