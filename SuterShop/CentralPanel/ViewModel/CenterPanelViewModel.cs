@@ -46,7 +46,7 @@ namespace SuterShop.CentralPanel.View
 
             foreach (var good in goods)
             {
-                var fileName = $"{good.Id}_{good.Name}.png";
+                var fileName = $"{good.Id}_{@"good.Name"}.png";
                 if (!File.Exists($"{dir}{fileName}"))
                 {
                     File.WriteAllBytes($"{dir}{fileName}", good.Image);
