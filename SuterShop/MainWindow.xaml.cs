@@ -42,5 +42,7 @@ namespace SuterShop
                 OpenAdminPanelBtn.Visibility = Visibility.Visible;
             }
         }
+
+        
     }
 }

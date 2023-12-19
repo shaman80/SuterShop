@@ -44,6 +44,7 @@
                     HorizontalAlignment="Right" 
                     Content="Личный кабинет"
                     Click="OpenAdminPanel"/>
+            
         </Grid>
         <UserControl Grid.Column="0" 
                      Grid.Row="1" 

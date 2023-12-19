@@ -10,13 +10,17 @@
         WindowStartupLocation="CenterOwner"
         Title="LoginingPanelView">
     <Grid>
-        <Border Margin="5" Name="loginPanel" Visibility="Visible" BorderBrush="DarkGray" BorderThickness="1" Width="250" Height="150">
+        <Border Margin="5" Name="loginPanel" Visibility="Visible" BorderBrush="DarkGray" BorderThickness="1" Width="250" Height="180">
             <StackPanel Background="AntiqueWhite" Orientation="Vertical" >
                 <TextBlock  Text="Логин" Margin="5,5,5,0"/>
                 <TextBox Name="userLogin" Margin="5"/>
                 <TextBlock Text="Пароль" Margin="5,5,5,0"/>
                 <TextBox Name="userPassword" Margin="5,5,5,15"/>
                 <Button Click="Logining" Content="Войти" Margin="5"></Button>
+                <Button Margin="5" 
+                    Content="Регистрация"
+                    Name="RegistrationBtn"
+                    Click="Registration"/>
             </StackPanel>
         </Border>
     </Grid>
