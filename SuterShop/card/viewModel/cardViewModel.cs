@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace SuterShop.card.viewModel
 {
-    //mrltkfmblfk
+    
     internal partial class cardViewModel : ObservableObject
     {
         [ObservableProperty] private GoodsForSale good;
