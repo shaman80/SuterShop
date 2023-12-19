@@ -22,13 +22,19 @@ namespace SuterShop.CentralPanel.View
 
         public CenterPanelViewModel()
         {
-
+            (Application.Current as IApp).GoodItemCountChanged += GoodItemCountChanged;
         }
+
+        private void GoodItemCountChanged()
+        {
+            Application.Current.Dispatcher.Invoke(() => { 
+                SetData(); 
+            });
+        }
+
         internal void SetData()
         {
             _db = (Application.Current as IApp).Db;
-
-            var goods1 = _db.GoodsList.Include("User").ToList();
             var goods = _db.GoodsForSaleList.Include("User").ToList();
             // Получаем папку куда пользователь установил нашу программу.
             var dir = $"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}TempImages{System.IO.Path.DirectorySeparatorChar}";
@@ -41,7 +47,10 @@ namespace SuterShop.CentralPanel.View
             foreach (var good in goods)
             {
                 var fileName = $"{good.Id}_{good.Name}.png";
-                File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                if (!File.Exists($"{dir}{fileName}"))
+                {
+                    File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                }
                 var card = new cardView();
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
