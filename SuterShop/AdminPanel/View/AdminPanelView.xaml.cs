@@ -53,6 +53,7 @@ namespace SuterShop.AdminPanel.View
         private void Logining(object sender, RoutedEventArgs e)
         {
             var db = (Application.Current as IApp).Db;
+
             var users = db.Users.ToList();
             foreach (var user in users)
             {

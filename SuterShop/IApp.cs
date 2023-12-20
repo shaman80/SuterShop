@@ -9,6 +9,9 @@ namespace SuterShop
         public DataBaseContext Db { get; set; }
         public UpdateUserDelegate UserIsLogining { get; set; }
         public UpdateCardDelegate GoodItemChanged { get; set; }
+        public UpdateCardDelegate GoodItemDel { get; set; }
+        public UpdateDelegate updateShopDelegate { get; set; }
+        public UpdateDelegate updateChatDelegate { get; set; }
         void filterCentral(List<Category> categoriesFilter);
     }
 }

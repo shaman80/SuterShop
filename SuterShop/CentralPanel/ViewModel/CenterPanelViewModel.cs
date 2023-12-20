@@ -22,11 +22,27 @@ namespace SuterShop.CentralPanel.View
 
         public CenterPanelViewModel()
         {
+            (Application.Current as IApp).GoodItemDel += DelsCard;
+            (Application.Current as IApp).updateShopDelegate += GoodItemCountChanged;
+        }
+        private void GoodItemCountChanged()
+        {
+            Application.Current.Dispatcher.Invoke(() => SetData());
+        }
+        public void DelsCard(GoodsForSale item)
+        {
+            foreach (var elem in CentralWrapPanel.Children)
+                if (((elem as cardView)!.DataContext as cardViewModel)!.Good.Id == item.Id)
+                    {
+                        CentralWrapPanel.Children.Remove(elem as cardView);
+                        break;
+                    }
+            
 
         }
         internal void SetData()
         {
-            _db = (Application.Current as IApp).Db;
+            _db = (Application.Current as IApp)!.Db;
 
             var goods1 = _db.GoodsList.Include("User").ToList();
             var goods = _db.GoodsForSaleList.Include("User").ToList();
@@ -37,11 +53,11 @@ namespace SuterShop.CentralPanel.View
             {
                 Directory.CreateDirectory(dir);
             }
-
+            CentralWrapPanel.Children.Clear();
             foreach (var good in goods)
             {
                 var fileName = $"{good.Id}_{good.Name}.png";
-                File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                if(!File.Exists($"{dir}{fileName}"))   File.WriteAllBytes($"{dir}{fileName}", good.Image);
                 var card = new cardView();
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(good, $"{dir}{fileName}");

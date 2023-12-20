@@ -18,13 +18,13 @@ namespace SuterShop.card.viewModel
         public cardViewModel()
         {
             good = new GoodsForSale();
-            (Application.Current as IApp).GoodItemChanged += GoodIsChanged;
+            (Application.Current as IApp)!.GoodItemChanged += GoodIsChanged;
         }
 
         private void GoodIsChanged(GoodsForSale goodsForSale)
         {
             if (Good.Id != goodsForSale.Id) return;
-            Good = null;
+            Good = null!;
             Good = goodsForSale;
         }
 

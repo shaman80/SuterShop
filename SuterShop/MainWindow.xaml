@@ -13,8 +13,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3"/>
             <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -29,13 +29,27 @@
                     HorizontalAlignment="Right" 
                     Content="Вход"
                     Click="OpenAdminPanel"/>
+            <Button Margin="5,5,150,5" 
+                    Name="LoginingBtn"
+                    Width="100" 
+                    HorizontalAlignment="Right" 
+                    Content="Вход"
+                    Click="Loginig"/>
             <Button Margin="5"
                     Name="logoutBtn"
-                    Visibility="Hidden"
+                    Visibility="Collapsed"
                     Width="100" 
                     HorizontalAlignment="Right" 
                     Content="Выход"
                     Click="Logout"/>
+            <Button Margin="5"
+                    Name="OpenAdminPanelBtn"
+                    Visibility="Hidden"
+                    Width="100" 
+                    HorizontalAlignment="Right" 
+                    Content="личный кабинет"
+                    Click="OpenAdminPanel"/>
+
         </Grid>
         <UserControl Grid.Column="0" 
                      Grid.Row="1" 
@@ -46,11 +60,17 @@
                    Grid.RowSpan="3"
                    Width="3"
                    Background="Gray"/>
-        <UserControl Grid.Column="2"
+        <UserControl Grid.Column="1"
                      Content="{Binding CenterPanel, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="1"/>
-        <UserControl Grid.Column="2" 
+        <UserControl Grid.Column="1" 
                      Content="{Binding BottomPanel, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="2"/>
+        <UserControl Grid.Column="2" 
+                     Content="{Binding ChatPanel, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Row="1"
+                     Grid.RowSpan="2"
+                     HorizontalAlignment="Center"
+                     Margin="15,0,0,0"/>
     </Grid>
 </Window>

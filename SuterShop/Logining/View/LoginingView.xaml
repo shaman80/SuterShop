@@ -1,0 +1,20 @@
+﻿<Window x:Class="SuterShop.Logining.View.LoginingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SuterShop.Logining.View"
+        mc:Ignorable="d"
+        Title="LoginingView" Height="450" Width="800">
+    <Grid>
+        <Border Name="loginPanel" Visibility="Visible" BorderBrush="DarkGray" BorderThickness="1" Width="250" Height="150">
+            <StackPanel Background="AntiqueWhite" Orientation="Vertical" >
+                <TextBlock  Text="Логин" Margin="5,5,5,0"/>
+                <TextBox Name="userLogin" Margin="5"/>
+                <TextBlock Text="Пароль" Margin="5,5,5,0"/>
+                <TextBox Name="userPassword" Margin="5,5,5,15"/>
+                <Button Click="Logining" Content="Войти" Margin="5"></Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

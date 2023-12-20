@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SuterShop
 {
@@ -11,6 +12,7 @@ namespace SuterShop
         public DbSet<SoldGoods> SoldGoodsList { get; set; }
         public DbSet<Category> Category { get; set; }       
         public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
         private string _cs { get; set; }
         public DataBaseContext(string cs)
         {
@@ -75,4 +77,13 @@ namespace SuterShop
     }
     public class GoodsForSale : Goods { }
     public class SoldGoods : Goods { }
+
+    public class Message
+    { 
+        public int Id { get; set; }
+        public string text { get; set; }
+        public User user { get; set; }
+        public DateTime Data { get; set; }
+    }
+
 }
