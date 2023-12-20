@@ -1,8 +1,8 @@
 ﻿using SuterShop.AdminPanel.View;
-using SuterShop.AdminPanel.ViewModel;
 using SuterShop.LoginingPanel.View;
 using SuterShop.LoginingPanel.ViewModel;
-using SuterShop.ViewModel;
+using SuterShop.RegisterPanel.View;
+using SuterShop.RegisterPanel.ViewModel;
 using System.Windows;
 
 namespace SuterShop
@@ -29,6 +29,7 @@ namespace SuterShop
             LogoutBtn.Visibility = Visibility.Hidden;
             OpenAdminPanelBtn.Visibility = Visibility.Hidden;
             LoginingBtn.Visibility = Visibility.Visible;
+            RegisterBtn.Visibility = Visibility.Visible;
         }
 
         private void Logining(object sender, RoutedEventArgs e)
@@ -38,6 +39,20 @@ namespace SuterShop
             if((Application.Current as IApp).CurrentUser != null)
             {
                 LoginingBtn.Visibility = Visibility.Hidden;
+                RegisterBtn.Visibility = Visibility.Hidden;
+                LogoutBtn.Visibility = Visibility.Visible;
+                OpenAdminPanelBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Register(object sender, RoutedEventArgs e)
+        {
+            var view = new RegisterPanelView { DataContext = new RegisterPanelViewModel() };
+            view.ShowDialog();
+            if ((Application.Current as IApp).CurrentUser != null)
+            {
+                LoginingBtn.Visibility = Visibility.Hidden;
+                RegisterBtn.Visibility = Visibility.Hidden;
                 LogoutBtn.Visibility = Visibility.Visible;
                 OpenAdminPanelBtn.Visibility = Visibility.Visible;
             }

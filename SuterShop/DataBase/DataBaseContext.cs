@@ -55,6 +55,7 @@ namespace SuterShop
         public int Price { get; set; }
         public int Count { get; set; } //количество товара
         public List<Message> Messages { get; set; }
+        public int SoldCount { get; set; }
         public Category Category { get; set; }
         public User User { get; set; }
     }
