@@ -11,9 +11,9 @@ namespace SuterShop.card.viewModel
     internal partial class cardViewModel : ObservableObject
     {
         [ObservableProperty] private GoodsForSale good;
+        private DataBaseContext _db;
         [ObservableProperty] private string imagePath;
-        
-
+        private List<GoodsForSale> _goods;
 
         public cardViewModel()
         {
@@ -28,10 +28,18 @@ namespace SuterShop.card.viewModel
             Good = goodsForSale;
         }
 
-        public void SetData(GoodsForSale Goods, string iPath)
+        public void SetData(List<GoodsForSale> goods, GoodsForSale Goods, string iPath)
         {
+            _goods = goods;
             ImagePath = iPath;
             Good = Goods;
+        }
+
+        internal void DeleteGoodItem(GoodsForSale goodForSale)
+        {
+            _goods.Remove(goodForSale);
+            _db.GoodsForSaleList.Remove(goodForSale);
+            _db.SaveChanges();
         }
     }
 }

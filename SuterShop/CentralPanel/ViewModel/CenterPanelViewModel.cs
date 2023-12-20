@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SuterShop.CentralPanel.View
 {
@@ -39,10 +41,16 @@ namespace SuterShop.CentralPanel.View
                     }
             
 
+        private void GoodItemCountChanged()
+        {
+            Application.Current.Dispatcher.Invoke(() => { 
+                SetData(); 
+            });
         }
+
         internal void SetData()
         {
-            _db = (Application.Current as IApp)!.Db;
+            _db = (Application.Current as IApp).Db;
 
             var goods1 = _db.GoodsList.Include("User").ToList();
             var goods = _db.GoodsForSaleList.Include("User").ToList();
@@ -60,7 +68,7 @@ namespace SuterShop.CentralPanel.View
                 if(!File.Exists($"{dir}{fileName}"))   File.WriteAllBytes($"{dir}{fileName}", good.Image);
                 var card = new cardView();
                 card.Margin = new Thickness(5);
-                (card.DataContext as cardViewModel).SetData(good, $"{dir}{fileName}");
+                (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
                 CentralWrapPanel.Children.Add(card);
             }
         }

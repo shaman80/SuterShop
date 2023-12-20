@@ -17,6 +17,10 @@ namespace SuterShop
     public partial class App : Application, IApp
     {
         private User currentUser;
+
+        private Timer _timer;
+        private int _countGoods;
+
         public User CurrentUser
         {
             get => currentUser;
@@ -48,33 +52,18 @@ namespace SuterShop
         {
              cs = "Server=192.168.88.54;Database=sfy;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(cs);
-           
-            
+            //Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
             CreateDefaultAdmin();
-            timer = new Timer(TimerTick,null,0,3000);
-            
-        }
 
         private void TimerTick(object? state)
         {
-            var _db = new DataBaseContext(cs);
-            var countGoods = _db.GoodsForSaleList.Count();
-            var countMessages = _db.Messages.Count();
-            _db.Database.CloseConnection();
+            var countGoods = Db.GoodsForSaleList.Count();
             if (_countGoods != countGoods)
             {
-                updateShopDelegate?.Invoke();
-            }
+                GoodItemCountChanged?.Invoke();
+            };
             _countGoods = countGoods;
-
-            if (_countMessages != countMessages)
-            {
-                updateChatDelegate?.Invoke();
-
-            }
-            _countMessages = countMessages;
-
         }
 
         private void CreateDefaultAdmin()

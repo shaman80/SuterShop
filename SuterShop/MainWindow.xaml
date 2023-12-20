@@ -37,19 +37,11 @@
                     Click="Loginig"/>
             <Button Margin="5"
                     Name="logoutBtn"
-                    Visibility="Collapsed"
+                    Visibility="Hidden"
                     Width="100" 
                     HorizontalAlignment="Right" 
                     Content="Выход"
                     Click="Logout"/>
-            <Button Margin="5"
-                    Name="OpenAdminPanelBtn"
-                    Visibility="Hidden"
-                    Width="100" 
-                    HorizontalAlignment="Right" 
-                    Content="личный кабинет"
-                    Click="OpenAdminPanel"/>
-
         </Grid>
         <UserControl Grid.Column="0" 
                      Grid.Row="1" 

@@ -30,7 +30,7 @@ namespace SuterShop.card.view
 
         private void UserIsLogining(User user)
         {
-            if (user is Seller)
+            if (user.Status == Statuses.Seller)
             {
                 EditGoodsItem.Visibility = Visibility.Visible;
             }
@@ -58,9 +58,11 @@ namespace SuterShop.card.view
 
         }
 
-        private void DeleteGoodItem(object sender, RoutedEventArgs e)
+
+        private void DeleteGoodItem(GoodsForSale goodForSale)
         {
-            //deleteFunc
+            (DataContext as cardViewModel)!.DeleteGoodItem(goodForSale);
+            (VisualParent as WrapPanel).Children.Remove(this);
         }
 
         private void RightButtonClick(object sender, MouseButtonEventArgs e)
@@ -83,23 +85,15 @@ namespace SuterShop.card.view
 
             image.ContextMenu.Items.Add(new Separator());
 
-            if((Application.Current as IApp).CurrentUser is Seller)
+            if((Application.Current as IApp).CurrentUser?.Status == Statuses.Seller)
             {
-                goodItem = ((sender as Image).DataContext as cardViewModel).Good;
-                if ((Application.Current as IApp).CurrentUser.Id == goodItem?.Seller.Id)
-                {
-                    menuItem = new MenuItem
-                    {
-                        Header = "Удалить товар",
-                    };
-                    menuItem.Click += DeleteGoodItem;
-                    image.ContextMenu.Items.Add(menuItem);
-                } 
+
                 // TODO! доделать удаление карточки товара.
                 
             }
 
         }
+
 
     }
 }
