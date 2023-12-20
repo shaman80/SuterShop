@@ -1,4 +1,5 @@
-﻿using SuterShop.ViewModel;
+﻿using Microsoft.EntityFrameworkCore;
+using SuterShop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,6 +30,9 @@ namespace SuterShop
                 currentUser = value;
             }
         }
+
+        private string _cs;
+
         public DataBaseContext Db { get; set; }
 
         public delegate void UpdateUserDelegate(User user);
@@ -41,10 +45,10 @@ namespace SuterShop
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
         public App()
         {
-            var cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
-            Db = new DataBaseContext(cs);
+            _cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
+            Db = new DataBaseContext(_cs);
            // Db.Database.EnsureDeleted();
-            Db.Database.EnsureCreated();
+            //Db.Database.EnsureCreated();
             CreateDefaultAdmin();
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null,0, 3000);
@@ -53,7 +57,9 @@ namespace SuterShop
 
         private void TimerTick(object? state)
         {
-            var countGoods = Db.GoodsForSaleList.Count();
+            var db = new DataBaseContext(_cs);
+            var countGoods = db.GoodsForSaleList.Count();
+            db.Database.CloseConnection();
             if (_countGoods != countGoods)
             {
                 GoodItemCountChanged?.Invoke();

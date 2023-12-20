@@ -1,5 +1,6 @@
 ﻿using SuterShop.AdminPanel.View;
 using SuterShop.card.viewModel;
+using SuterShop.Feedback.View;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,6 +99,12 @@ namespace SuterShop.card.view
 
         }
 
-
+        private void OpenFeedbackWindow(object sender, RoutedEventArgs e)
+        {
+            var goodItem = ((sender as Button).DataContext as cardViewModel).Good;
+            var view = new FeedbackView();
+            view.SetData(goodItem);
+            view.ShowDialog();
+        }
     }
 }

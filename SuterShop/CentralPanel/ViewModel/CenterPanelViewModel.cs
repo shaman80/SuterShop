@@ -50,8 +50,12 @@ namespace SuterShop.CentralPanel.View
             CentralWrapPanel.Children.Clear();
             foreach (var good in goods)
             {
-                var fileName = $"{good.Id}_{good.Name}.png";
-                File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                var fileName = $"{good.Category.Id}_{good.Id}.png";
+                if (!File.Exists($"{dir}{fileName}"))
+                {
+                    File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                }
+                
                 var card = new cardView();
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
