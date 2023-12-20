@@ -68,6 +68,7 @@ namespace SuterShop
         public int ID { get; set; }
         public string Text { get; set; }
         public string Sender { get; set; }
+        public DateTime? Timestamp { get; internal set; }
     }
 
     public class User

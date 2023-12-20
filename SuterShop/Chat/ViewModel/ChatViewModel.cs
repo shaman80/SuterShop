@@ -15,16 +15,31 @@ namespace SuterShop.Chat.ViewModel
     internal partial class ChatViewModel : ObservableObject
     {
         private DataBaseContext _db;
+        private System.Timers.Timer dbPoollingTimer;
         [ObservableProperty] private ObservableCollection<ChatMessage> chatMessages;
 
 
         public ChatViewModel()
         {
             _db = (Application.Current as IApp).Db;
-            chatMessages= new ObservableCollection<ChatMessage>(_db.ChatMessages);
+            chatMessages = new ObservableCollection<ChatMessage>(_db.ChatMessages);
+            dbPoollingTimer = new System.Timers.Timer();
+            dbPoollingTimer.Interval = 1000;
+            dbPoollingTimer.Elapsed += DbPoollingTimer_Elapsed;
+            dbPoollingTimer.Start();
             //RefreshChat();
         }
-        
+
+        private void DbPoollingTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            var lastTimestamp = chatMessages.Max(cm => (DateTime?)cm.Timestamp) ?? DateTime.MinValue;
+            var newMessages = _db.ChatMessages.Where(m => m.Timestamp > lastTimestamp);
+            foreach (var message in newMessages)
+            {
+                chatMessages.Add(message);
+            }
+        }
+
 
         public void SendMessage(ChatMessage newMessage)
         {
