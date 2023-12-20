@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -37,8 +38,6 @@ namespace SuterShop.CentralPanel.View
         internal void SetData()
         {
             _db = (Application.Current as IApp).Db;
-            _db.Database.CloseConnection();
-            _db.Database.OpenConnection();
             var goods = _db.GoodsForSaleList.Include("User").ToList();
             // Получаем папку куда пользователь установил нашу программу.
             var dir = $"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}TempImages{System.IO.Path.DirectorySeparatorChar}";
@@ -57,6 +56,7 @@ namespace SuterShop.CentralPanel.View
                 }
                 
                 var card = new cardView();
+
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
                 CentralWrapPanel.Children.Add(card);
