@@ -51,6 +51,7 @@ namespace SuterShop
           
         }
 
+
         private void TimerTick(object? state)
         {
             var countGoods = Db.GoodsForSaleList.Count();
@@ -58,7 +59,7 @@ namespace SuterShop
             {
                 GoodItemCountChanged?.Invoke();
             };
-            _countGoods = countGoods;
+            _countGoods = countGoods; 
         }
 
         private void CreateDefaultAdmin()

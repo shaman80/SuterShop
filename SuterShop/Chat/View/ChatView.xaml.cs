@@ -27,7 +27,7 @@ namespace SuterShop.Chat.View
 
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as ChatViewModel).SendMessage();
+            (DataContext as ChatViewModel).SendMessage(new ChatMessage { Text = MessageTextBox.Text });
             MessageTextBox.Text = "";
             ChatListBox.SelectedIndex = ChatListBox.Items.Count - 1;
             ChatListBox.ScrollIntoView(ChatListBox.SelectedItem);
