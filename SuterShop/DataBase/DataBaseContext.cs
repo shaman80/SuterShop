@@ -53,6 +53,7 @@ namespace SuterShop
         public Byte[] Image { get; set; }
         public int Price { get; set; }
         public int Count { get; set; } //количество товара
+        public int SoldCount { get; set; }
         public Category Category { get; set; }
         public User User { get; set; }
     }

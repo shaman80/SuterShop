@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace SuterShop.CentralPanel.View
@@ -46,12 +47,18 @@ namespace SuterShop.CentralPanel.View
 
             foreach (var good in goods)
             {
-                var fileName = $"{good.Id}_{@"good.Name"}.png";
+                var fileName = $"{good.Category.Id}_{good.Id}.png";
                 if (!File.Exists($"{dir}{fileName}"))
                 {
                     File.WriteAllBytes($"{dir}{fileName}", good.Image);
                 }
+
+                var image = new Image();
+                image.Source = new BitmapImage(new Uri($"pack://application:,,,{dir}{fileName}"));
+
+
                 var card = new cardView();
+
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
                 CentralWrapPanel.Children.Add(card);
