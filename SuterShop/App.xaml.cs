@@ -1,4 +1,5 @@
-﻿using SuterShop.ViewModel;
+﻿using Microsoft.EntityFrameworkCore;
+using SuterShop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,6 +20,7 @@ namespace SuterShop
 
         private Timer _timer;
         private int _countGoods;
+        private int _countMessages;
 
         public User CurrentUser
         {
@@ -39,9 +41,11 @@ namespace SuterShop
 
         public delegate void UpdateShopDelegate();
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
+        public UpdateShopDelegate MessageItemCountChanged { get; set; }
+        private string cs;
         public App()
         {
-            var cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
+            cs = "Server=192.168.88.54;Database=sfy;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(cs);
            // Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
@@ -53,12 +57,21 @@ namespace SuterShop
 
         private void TimerTick(object? state)
         {
-            var countGoods = Db.GoodsForSaleList.Count();
+            var db = new DataBaseContext(cs);
+            var countGoods = db.GoodsForSaleList.Count();
+            var countMessages = db.Messages.Count();
+            db.Database.CloseConnection();
+
             if (_countGoods != countGoods)
             {
                 GoodItemCountChanged?.Invoke();
             };
-            _countGoods = countGoods;
+            _countGoods = countGoods; 
+            if (_countMessages != countMessages)
+            {
+                MessageItemCountChanged?.Invoke();
+            };
+            _countMessages = countMessages;
         }
 
         private void CreateDefaultAdmin()

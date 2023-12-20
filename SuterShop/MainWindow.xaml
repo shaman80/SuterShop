@@ -12,9 +12,9 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -49,16 +49,18 @@
                      Grid.Row="1" 
                      Content="{Binding LeftPanel, UpdateSourceTrigger=PropertyChanged}"
                      Grid.RowSpan="2"/>
-        <GridSplitter Grid.Column="1"
-                   Grid.Row="0"
-                   Grid.RowSpan="3"
-                   Width="3"
-                   Background="Gray"/>
-        <UserControl Grid.Column="2"
+
+         
+
+        <UserControl Grid.Column="1"
                      Content="{Binding CenterPanel, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="1"/>
-        <UserControl Grid.Column="2" 
+        <UserControl Grid.Column="1" 
                      Content="{Binding BottomPanel, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="2"/>
+        <UserControl Grid.Column="2" 
+                     Grid.RowSpan="2"
+                     Content="{Binding ChatPanel, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Row="1"/>
     </Grid>
 </Window>

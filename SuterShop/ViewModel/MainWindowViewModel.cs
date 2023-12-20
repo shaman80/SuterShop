@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SuterShop.CentralPanel.View;
+using SuterShop.Chat;
 using SuterShop.LeftPanel.View;
 using SuterShop.LeftPanel.ViewModel;
 using System;
@@ -16,6 +17,7 @@ namespace SuterShop.ViewModel
         [ObservableProperty] private Control leftPanel;
         [ObservableProperty] private Control centerPanel;
         [ObservableProperty] private Control bottomPanel;
+        [ObservableProperty] private Control chatPanel;
 
         public MainWindowViewModel()
         {
@@ -25,6 +27,8 @@ namespace SuterShop.ViewModel
             centerPanel = new CenterPanelView();
             (centerPanel.DataContext as CenterPanelViewModel)!.SetData();
             bottomPanel = new Label { Content = " Нижняя панель" };
+            chatPanel = new ChatView();
+            (chatPanel.DataContext as ChatViewModel)!.SetData();
         }
 
         internal void ShowPushProduct() //какая-то интересная функция, но над ней еще надо поработать

@@ -51,7 +51,10 @@ namespace SuterShop.CentralPanel.View
             foreach (var good in goods)
             {
                 var fileName = $"{good.Id}_{good.Name}.png";
-                File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                if (!File.Exists($"{dir}{fileName}"))
+                {
+                    File.WriteAllBytes($"{dir}{fileName}", good.Image);
+                }
                 var card = new cardView();
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
