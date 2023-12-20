@@ -45,10 +45,10 @@ namespace SuterShop
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
         public App()
         {
-            _cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";
+            _cs = "Server=192.168.88.54;Database=shopFelest;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(_cs);
            // Db.Database.EnsureDeleted();
-            //Db.Database.EnsureCreated();
+            Db.Database.EnsureCreated();
             CreateDefaultAdmin();
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null,0, 3000);

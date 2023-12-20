@@ -11,7 +11,7 @@
     </Window.DataContext>
     <Grid Margin="5" Background="#FFA9E8B8">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -20,19 +20,19 @@
             <RowDefinition Height="130"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-            <Label Name="itemName" VerticalAlignment="Top"  Margin="10"/>
-            <Label Name="itemCategory" VerticalAlignment="Top" Margin="10, 50,10, 10"/>
-            <Label Name="itemDescription" VerticalAlignment="Top" Margin="10, 50, 10, 10"/>
+            <Label Name="itemName" VerticalAlignment="Top"  Margin="10" BorderThickness="2" BorderBrush="#FF3A4E3A"/>
+            <Label Name="itemCategory" VerticalAlignment="Top" Margin="10, 50,10, 10" BorderThickness="2" BorderBrush="#FF3A4E3A"/>
+            <Label Name="itemDescription" VerticalAlignment="Top" Margin="10, 90, 10, 10" BorderThickness="2" BorderBrush="#FF3A4E3A"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
-            <WrapPanel Name="feedbackMessages"></WrapPanel>
+            <WrapPanel Name="feedbackMessagesPanel"></WrapPanel>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2">
-            <TextBox Height="100" Width="450" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"></TextBox>
-            <Button Content="Отправить отзыв"
-                    Height="30"
-                    Width="100"
-                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"></Button>
+            <TextBox Name="newFeedbackMessage" Height="100" Width="330" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"></TextBox>
+            <Button Content="Отправить отзыв" Background="#FF2B5B4B"
+                    Height="30" Width="100"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"
+                    Click="AddFeedbackMessage"/>
         </Grid>
     </Grid>
 </Window>

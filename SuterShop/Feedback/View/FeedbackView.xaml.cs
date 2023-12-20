@@ -24,7 +24,8 @@ namespace SuterShop.Feedback.View
         {
             InitializeComponent();
         }
-
+  
+        
         internal void SetData(GoodsForSale goodItem)
         {
             //var dir = $"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}TempImages{System.IO.Path.DirectorySeparatorChar}";
@@ -37,6 +38,18 @@ namespace SuterShop.Feedback.View
             itemCategory.Content = goodItem.Category;
             itemDescription.Content = goodItem.Description;
             //itemImage.Source = new BitmapImage(new Uri(fileName));
+        }
+
+        private void AddFeedbackMessage(object sender, RoutedEventArgs e)
+        {
+            var message = new Message
+            {
+                messageText = newFeedbackMessage.Text,
+            };
+            var db = (Application.Current as IApp).Db;
+            db.Messages.Add(message);
+            db.SaveChanges();
+            feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
         }
     }
 }
