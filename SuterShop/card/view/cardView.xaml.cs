@@ -24,6 +24,10 @@ namespace SuterShop.card.view
             {
                 EditGoodsItem.Visibility = Visibility.Visible;
             }
+            else if (user?.Status == Statuses.Buyer)
+            {
+                ReviewBtn.Visibility = Visibility.Visible;
+            }
             else
             {
                 EditGoodsItem.Visibility = Visibility.Collapsed;
@@ -95,9 +99,13 @@ namespace SuterShop.card.view
                 // TODO! доделать удаление карточки товара.
                 
             }
+           
 
         }
 
+        private void OpenReview(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

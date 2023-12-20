@@ -37,7 +37,7 @@ namespace SuterShop.AdminPanel.View
                 sellerPanel.Visibility = Visibility.Visible;
                 LoadCategoryes();
             }
-            else
+            else if ((Application.Current as IApp)!.CurrentUser.Status == Statuses.Buyer)
             {
                 adminPanel.Visibility = Visibility.Hidden;
                 sellerPanel.Visibility = Visibility.Hidden;
