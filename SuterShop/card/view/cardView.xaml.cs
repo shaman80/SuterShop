@@ -98,6 +98,9 @@ namespace SuterShop.card.view
 
         }
 
-
+        private void OpenChat(object sender, RoutedEventArgs e)
+        {
+            (DataContext as cardViewModel).OpenChat();
+        }
     }
 }

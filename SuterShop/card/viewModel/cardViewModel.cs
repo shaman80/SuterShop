@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SuterShop.Chat.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,12 @@ namespace SuterShop.card.viewModel
             _goods.Remove(goodForSale);
             _db.GoodsForSaleList.Remove(goodForSale);
             _db.SaveChanges();
+        }
+
+        internal void OpenChat()
+        {
+            var chatView = new ChatView();
+            chatView.ShowDialog();
         }
     }
 }
