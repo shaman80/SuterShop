@@ -11,6 +11,7 @@ namespace SuterShop
         public DbSet<SoldGoods> SoldGoodsList { get; set; }
         public DbSet<Category> Category { get; set; }       
         public DbSet<User> Users { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
         private string _cs { get; set; }
         public DataBaseContext(string cs)
         {
@@ -60,6 +61,13 @@ namespace SuterShop
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class ChatMessage
+    {
+        public int ID { get; set; }
+        public string Text { get; set; }
+        public string Sender { get; set; }
     }
 
     public class User

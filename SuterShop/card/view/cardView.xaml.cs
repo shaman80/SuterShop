@@ -1,5 +1,7 @@
 ﻿using SuterShop.AdminPanel.View;
 using SuterShop.card.viewModel;
+using SuterShop.Chat.View;
+using SuterShop.Chat.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,7 +42,10 @@ namespace SuterShop.card.view
 
         private void AddToCard(object sender, RoutedEventArgs e)
         {
-
+            var goodItem = ((sender as Button).DataContext as cardViewModel).Good;
+            var chat = new ChatView();
+            (chat.DataContext as ChatViewModel).SetData(goodItem);
+            chat.ShowDialog();
         }
 
         private void OpenDescription(object sender, RoutedEventArgs e)
