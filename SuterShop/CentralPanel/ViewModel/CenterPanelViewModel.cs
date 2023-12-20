@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -53,7 +54,13 @@ namespace SuterShop.CentralPanel.View
                 {
                     File.WriteAllBytes($"{dir}{fileName}", good.Image);
                 }
+
+                var image = new Image();
+                image.Source = new BitmapImage(new Uri($"pack://application:,,,{dir}{fileName}"));
+
+
                 var card = new cardView();
+
                 card.Margin = new Thickness(5);
                 (card.DataContext as cardViewModel).SetData(goods, good, $"{dir}{fileName}");
                 CentralWrapPanel.Children.Add(card);
