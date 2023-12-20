@@ -11,6 +11,7 @@ namespace SuterShop
         public DbSet<SoldGoods> SoldGoodsList { get; set; }
         public DbSet<Category> Category { get; set; }       
         public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
         private string _cs { get; set; }
         public DataBaseContext(string cs)
         {
@@ -53,6 +54,7 @@ namespace SuterShop
         public Byte[] Image { get; set; }
         public int Price { get; set; }
         public int Count { get; set; } //количество товара
+        public List<Message> Messages { get; set; }
         public Category Category { get; set; }
         public User User { get; set; }
     }
@@ -62,6 +64,14 @@ namespace SuterShop
         public string Name { get; set; }
     }
 
+    public class Message
+    {
+        internal string messageText;
+
+        public int Id { get; set; }
+        public string MessageText { get; set; }
+        public string Sender { get; set; }
+    }
     public class User
     {
         public int Id { get; set; }
