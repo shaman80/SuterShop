@@ -15,24 +15,25 @@ namespace SuterShop.AdminPanel.ViewModel
         private DataBaseContext _db;
         [ObservableProperty] private User user;
         [ObservableProperty] private ObservableCollection<Category> categories;
-        [ObservableProperty] private ObservableCollection<Seller> sellers;
+        [ObservableProperty] private ObservableCollection<User> sellers;
         public AdminPanelViewModel()
         {
             _db = (Application.Current as IApp).Db;
         }
 
-        internal void AddNewSeller(Seller seller)
+        internal void AddNewSeller(User seller)
         {
-            _db.Seller.Add(seller);
+            _db.Users.Add(seller);
             _db.SaveChanges();
         }
 
         internal void LoadSellers()
         {
-            Sellers = new ObservableCollection<Seller>();
-            var listSellers = _db.Seller.ToList();
-            foreach (Seller seller in listSellers)
+            Sellers = new ObservableCollection<User>();
+            var listSellers = _db.Users.ToList();
+            foreach (User seller in listSellers)
             {
+                if (seller.Status != Statuses.Seller) continue;
                 Sellers.Add(seller);
             }
         }
@@ -75,9 +76,9 @@ namespace SuterShop.AdminPanel.ViewModel
             LoadCategoryes();
         }
 
-        internal void DeleteSeller(Seller? seller)
+        internal void DeleteSeller(User? seller)
         {
-            _db.Seller.Remove(seller);
+            _db.Users.Remove(seller);
             _db.SaveChanges();
             LoadSellers();
         }

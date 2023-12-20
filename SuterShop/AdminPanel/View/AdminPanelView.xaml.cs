@@ -24,14 +24,16 @@ namespace SuterShop.AdminPanel.View
 
         private void TestCurrentUser()
         {
-            if ((Application.Current as IApp)!.CurrentUser is Admin)
+            if((Application.Current as IApp).CurrentUser == null) return;
+
+            if ((Application.Current as IApp).CurrentUser.Status == Statuses.Admin)
             {
                 adminPanel.Visibility = Visibility.Visible;
                 sellerPanel.Visibility = Visibility.Hidden;
                 loginPanel.Visibility = Visibility.Hidden;
                 LoadSellers();
                 LoadCategoryes();
-            }else if ((Application.Current as IApp)!.CurrentUser is Seller)
+            }else if ((Application.Current as IApp)!.CurrentUser.Status == Statuses.Seller)
             {
                 adminPanel.Visibility = Visibility.Hidden;
                 sellerPanel.Visibility = Visibility.Visible;
@@ -51,41 +53,29 @@ namespace SuterShop.AdminPanel.View
         private void Logining(object sender, RoutedEventArgs e)
         {
             var db = (Application.Current as IApp).Db;
-            var admins = db.Admins.ToList();
-
-            foreach (var admin in admins)
+            var users = db.Users.ToList();
+            foreach (var user in users)
             {
-                if(admin.Login == userLogin.Text && admin.Password == userPassword.Text)
+                if(user.Login == userLogin.Text && user.Password == userPassword.Text)
                 {
-                    (Application.Current as IApp)!.CurrentUser = admin;
+                    (Application.Current as IApp)!.CurrentUser = user;
                     TestCurrentUser();
                     return;
                 }
             }
-
-            var sellers = db.Seller.ToList();
-            foreach (var seller in sellers)
-            {
-                if (seller.Login == userLogin.Text && seller.Password == userPassword.Text)
-                {
-                    (Application.Current as IApp)!.CurrentUser = seller;
-                    TestCurrentUser();
-                    return;
-                }
-            }
-
         }
 
 
         private void AddNewSeller(object sender, RoutedEventArgs e)
         {
-            var seller = new Seller
+            var seller = new User
             {
                 FullName = foolName.Text,
                 Login = login.Text,
                 Email = email.Text,
                 Password = password.Text,
                 sum = 0,
+                Status = Statuses.Seller,
             };
 
             foolName.Text = string.Empty;
@@ -116,7 +106,7 @@ namespace SuterShop.AdminPanel.View
         private void DeleteSeller(object sender, RoutedEventArgs e)
         {
             (sender as Button).IsEnabled=false;
-            var seller = (sender as Button).DataContext as Seller;
+            var seller = (sender as Button).DataContext as User;
             (DataContext as AdminPanelViewModel).DeleteSeller(seller);
         }
         private void AddNewCategory(object sender, RoutedEventArgs e)
@@ -138,8 +128,7 @@ namespace SuterShop.AdminPanel.View
             }
             else {
                 AddNewGoodsItem();
-            }
-            
+            }       
         }
 
         private void EditGoodsItem()
@@ -155,7 +144,7 @@ namespace SuterShop.AdminPanel.View
             _goodItem.Count = count;
             _goodItem.Category = category;
             _goodItem.Image = butes;
-            _goodItem.Seller = (Application.Current as IApp)!.CurrentUser as Seller;
+            _goodItem.User = (Application.Current as IApp)!.CurrentUser;
    
             (DataContext as AdminPanelViewModel).EditGoodsItem(_goodItem);
             Close();
@@ -176,7 +165,7 @@ namespace SuterShop.AdminPanel.View
                 Count = count,
                 Category = category,
                 Image = butes,
-                Seller = (Application.Current as IApp)!.CurrentUser as Seller
+                User = (Application.Current as IApp)!.CurrentUser
             };
             (DataContext as AdminPanelViewModel).AddNewGoodsItem(goods);
         }
