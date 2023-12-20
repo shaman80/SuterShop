@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SuterShop.Registration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,18 +42,11 @@ namespace SuterShop.LoginingPanel.View
 
         private void Registration(object sender, RoutedEventArgs e)
         {
-            var db = (Application.Current as IApp).Db;
-            var users = db.Users.ToList();
-            foreach (var user in users)
-            {
-                if (user.Login == userLogin.Text )
-                {
-                    MessageBox.Show("Пользователь с таким именем уже зарегистрирован");
-                    Close();
-                    return;
-                }
-            }
 
+            var registration = new RegistrationView { DataContext = new RegistrationViewModel() };
+            registration.ShowDialog();
+
+            Close();
         }
     }
 }

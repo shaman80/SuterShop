@@ -197,5 +197,10 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
+        <StackPanel Name="byerPanel" Visibility="Hidden" Orientation="Vertical">
+
+            <Label Content="Кабинет покупателя"/>
+
+        </StackPanel>
     </Grid>
 </Window>

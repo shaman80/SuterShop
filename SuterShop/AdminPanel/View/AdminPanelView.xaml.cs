@@ -41,12 +41,11 @@ namespace SuterShop.AdminPanel.View
             {
                 adminPanel.Visibility = Visibility.Hidden;
                 sellerPanel.Visibility = Visibility.Hidden;
+                byerPanel.Visibility = Visibility.Visible;
             }
         }
 
-
-
-
+        
 
 
         private void AddNewSeller(object sender, RoutedEventArgs e)
@@ -188,7 +187,9 @@ namespace SuterShop.AdminPanel.View
                 Image.Text = openFileDialog.FileName;
             }
         }
-        //zxc!!!
+
+        
+       
 
     }
 }

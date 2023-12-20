@@ -27,6 +27,8 @@ namespace SuterShop.AdminPanel.ViewModel
             _db.SaveChanges();
         }
 
+        
+
         internal void LoadSellers()
         {
             Sellers = new ObservableCollection<User>();
@@ -59,6 +61,8 @@ namespace SuterShop.AdminPanel.ViewModel
             _db.SaveChanges();
             LoadCategoryes();
         }
+
+        
 
         internal void SaveCategoryes()
         {
