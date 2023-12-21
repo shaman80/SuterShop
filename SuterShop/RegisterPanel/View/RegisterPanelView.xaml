@@ -14,6 +14,8 @@
             <StackPanel Background="AntiqueWhite" Orientation="Vertical" >
                 <TextBlock  Text="Логин" Margin="5,5,5,0"/>
                 <TextBox Name="userLogin" Margin="5"/>
+                <TextBlock  Text="Имя" Margin="5,5,5,0"/>
+                <TextBox Name="FullName" Margin="5"/>
                 <TextBlock Text="Email" Margin="5,5,5,0"/>
                 <TextBox Name="userEmail" Margin="5,5,5,15"/>
                 <TextBlock Text="Пароль" Margin="5,5,5,0"/>

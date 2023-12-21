@@ -100,7 +100,10 @@ namespace SuterShop.card.view
 
         private void OpenChat(object sender, RoutedEventArgs e)
         {
-            (DataContext as cardViewModel).OpenChat();
+            var button = sender as Button;
+            var goodItem = (button.DataContext as cardViewModel).Good;
+            (DataContext as cardViewModel).OpenChat(goodItem);
+           
         }
     }
 }

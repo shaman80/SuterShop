@@ -44,6 +44,9 @@ namespace SuterShop
         public delegate void UpdateShopDelegate();
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
 
+        public delegate void UpdateMessageDelegate();
+        public UpdateMessageDelegate ChatMessageCount { get; set; }
+
         public App()
         {
             //_cs = "Server=192.168.88.54;Database=shop;Uid=root;Pwd=1q2w3e;";

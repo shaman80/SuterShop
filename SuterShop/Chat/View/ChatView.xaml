@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuterShop.Chat.View" xmlns:viewmodel="clr-namespace:SuterShop.Chat.ViewModel"
         mc:Ignorable="d"
-        Title="ChatView" Height="400" Width="600">
+        Title="ChatView" Height="400" Width="400">
     <Window.DataContext>
         <viewmodel:ChatViewModel/>
     </Window.DataContext>
@@ -19,10 +19,13 @@
                 BorderBrush="Gainsboro"
                 BorderThickness="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Name="stackPanel" Grid.Row="0"
-             Margin="10">
+                <StackPanel Name="StackPanel"
+                            Grid.Row="0"
+                            Margin="10"
+                            >
                     <TextBlock  Name="ChatTextBlock"
-                 TextWrapping="Wrap"/>
+                                TextWrapping="Wrap"
+                                Margin="5"/>
                 </StackPanel>
             </ScrollViewer>
            
@@ -35,13 +38,13 @@
             </Grid.ColumnDefinitions>
             <TextBox Name="ChatTextBox" Grid.Column="0"
                      Grid.Row="1"
-                     Width="450"
-                     Margin="5"/>  
+                     Width="270"
+                     Margin="-30,5,0,5"/>  
             <Button Grid.Column="1"
                     Grid.Row="1"
                     Content="Отправить"
                     Width="100"
-                    Margin="5"
+                    Margin="-35,5,5,5"
                     Click="SendChatMessage"/>
         </Grid>
             

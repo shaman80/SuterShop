@@ -30,7 +30,7 @@ namespace SuterShop.RegisterPanel.View
             var newUser = new User
             {
                 Login = userLogin.Text,
-                FullName = "",
+                FullName = FullName.Text,
                 Password = userPassword.Text,
                 Email = userEmail.Text,
                 Status = Statuses.Buyer,

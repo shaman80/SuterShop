@@ -53,8 +53,8 @@ namespace SuterShop.CentralPanel.View
                     File.WriteAllBytes($"{dir}{fileName}", good.Image);
                 }
 
-                var image = new Image();
-                image.Source = new BitmapImage(new Uri($"pack://application:,,,{dir}{fileName}"));
+                //var image = new Image();
+                //image.Source = new BitmapImage(new Uri($"pack://application:,,,{dir}{fileName}"));
 
 
                 var card = new cardView();

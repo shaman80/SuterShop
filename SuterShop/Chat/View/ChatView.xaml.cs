@@ -23,14 +23,16 @@ namespace SuterShop.Chat.View
         public ChatView()
         {
             InitializeComponent();
+            (DataContext as ChatViewModel).SetData(StackPanel);
+            //(DataContext as ChatViewModel).LoadChatMessages();
         }
 
         private void SendChatMessage(object sender, RoutedEventArgs e)
         {
             var chatTextMessage = ChatTextBox.Text;
-            var c = new TextBlock { Text = chatTextMessage };
-            stackPanel.Children.Add(c);
-            //ChatTextBlock.Text = chatTextMessage;
+            //var text = new TextBlock { Text = chatTextMessage };
+            //StackPanel.Children.Add(text);
+           
             (DataContext as ChatViewModel).SendChatMessage(chatTextMessage);
             ChatTextBox.Text = string.Empty;
         }
