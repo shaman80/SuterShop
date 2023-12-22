@@ -52,13 +52,13 @@ namespace SuterShop
         {
             cs = "Server=192.168.88.54;Database=sfy;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(cs);
-            Db.Database.EnsureDeleted();
+           // Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
             
             CreateDefaultAdmin();
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null,0, 3000);
-            TimerOnline = new Timer(trackingOnlineStatuses,null, 0, 30000);
+            TimerOnline = new Timer(trackingOnlineStatuses,null, 0, 20000);
         }
 
         private void TimerTick(object? state)
@@ -79,28 +79,52 @@ namespace SuterShop
         }
         private void trackingOnlineStatuses(object? state)
         {
+
             var _db = new DataBaseContext(cs);
-            var t = 0;
+            foreach (var elem in _db.OnlineUsers)
+            {
+                if (DateTime.Now.Minute - elem.timer.Minute > 5)
+                {
+                    _db.OnlineUsers.Remove(elem);
+                }
+            }
+            _db.SaveChanges();
             if (CurrentUser != null)
             {
-                foreach(var elem in _db.OnlineUsers) 
+                User us = new User();
+                var t = 0;
+                foreach (var elem in _db.Users)
                 {
-                    if (elem.user.Id == CurrentUser.Id)
+                    if (elem.Id == CurrentUser.Id)
                     {
-                        elem.timer = DateTime.Now;
-                        _db.OnlineUsers.Update(elem);
-                        
-                       
-                        t = 1;
+                        us = elem;
                     }
                 }
-                if (t == 0)
+                if (_db.OnlineUsers != null)
                 {
-                    var temp = new OnlineUser { user = CurrentUser, timer = DateTime.Now };
-                    _db.OnlineUsers.Add(temp);
-     
+                    foreach (var elem in _db.OnlineUsers)
+                    {
+                        if (elem.user.Id == CurrentUser.Id)
+                        {
+                            elem.timer = DateTime.Now;
+                            _db.OnlineUsers.Update(elem);
+                            t = 1;
+                        }
+                    }
+                    if (t == 0)
+                    {
+
+                        var temp = new OnlineUser
+                        {
+                            user = us,
+                            timer = DateTime.Now
+                        };
+
+                        _db.OnlineUsers.Add(temp);
+
+                    }
+                    _db.SaveChanges();
                 }
-                _db.SaveChanges();
             }
            
         }

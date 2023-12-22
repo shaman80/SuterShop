@@ -65,7 +65,12 @@ namespace SuterShop
         public int Id { get; set; }
         public string Name { get; set; }
     }
-
+    public class OnlineUser
+    {
+        public int Id { get; set; }
+        public User user { get; set; }
+        public DateTime timer { get; set; }
+    }
     public class User
     {
         public int Id { get; set; }
@@ -77,12 +82,7 @@ namespace SuterShop
         public int sum { get; set; }
         public Statuses Status { get; set; }
     }
-    public class OnlineUser
-    {
-        public int Id { get;set; }
-        public User user { get; set; }
-        public DateTime timer { get; set; }
-    }
+    
     public class GoodsForSale : Goods { }
     public class SoldGoods : Goods { }
 

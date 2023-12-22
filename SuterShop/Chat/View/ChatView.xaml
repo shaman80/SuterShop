@@ -13,6 +13,7 @@
         <converter:backgroundUserChatConverter x:Key="backgroundUserChatConverter"></converter:backgroundUserChatConverter>
         <converter:dataConverter x:Key="dataConverter"/>
         <converter:nameConverter x:Key="nameConverter"/>
+        <converter:converterOnlineUserColor x:Key="OnlineUser"/>
     </UserControl.Resources>
     <ScrollViewer x:Name="scroll">
         <StackPanel Orientation="Vertical" >
@@ -23,7 +24,7 @@
                             <StackPanel Orientation="Vertical" >
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="#582C0B" Visibility="{Binding user.Id,Converter={StaticResource nameConverter}}"/>
-                                    
+                                    <Ellipse Width="5" Height="5" Fill="{Binding user.Id, Converter={StaticResource  OnlineUser} }"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Margin="5" TextWrapping="Wrap" Width="200" Text="{Binding text}"/>
