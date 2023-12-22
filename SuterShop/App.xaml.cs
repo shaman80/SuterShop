@@ -31,6 +31,9 @@ namespace SuterShop
                 currentUser = value;
             }
         }
+
+        private string _cs;
+
         public DataBaseContext Db { get; set; }
 
         public delegate void UpdateUserDelegate(User user);
@@ -57,11 +60,7 @@ namespace SuterShop
 
         private void TimerTick(object? state)
         {
-            var db = new DataBaseContext(cs);
-            var countGoods = db.GoodsForSaleList.Count();
-            var countMessages = db.Messages.Count();
-            db.Database.CloseConnection();
-
+            var countGoods = Db.GoodsForSaleList.Count();
             if (_countGoods != countGoods)
             {
                 GoodItemCountChanged?.Invoke();
