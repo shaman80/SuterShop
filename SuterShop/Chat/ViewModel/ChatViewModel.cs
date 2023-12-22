@@ -28,14 +28,23 @@ namespace SuterShop.Chat.ViewModel
             //RefreshChat();
         }
 
-        private void RefreshChat(ChatMessage lastMessage)
+        private void RefreshChat(List<ChatMessage> messages)
         {
-            var messages = _db.ChatMessages.ToList();
-            chatMessages.Add(lastMessage);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                UpdateChat(messages);
+            });
+           
+  
+        }
+
+        private void UpdateChat(List<ChatMessage> messages)
+        {
+            chatMessages.Clear();
             foreach (var message in messages)
             {
                 chatMessages.Add(message);
-            }
+            }      
         }
 
         public void SendMessage(ChatMessage newMessage)

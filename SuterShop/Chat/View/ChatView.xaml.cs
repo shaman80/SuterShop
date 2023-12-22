@@ -32,5 +32,6 @@ namespace SuterShop.Chat.View
             ChatListBox.SelectedIndex = ChatListBox.Items.Count - 1;
             ChatListBox.ScrollIntoView(ChatListBox.SelectedItem);
         }
+
     }
 }

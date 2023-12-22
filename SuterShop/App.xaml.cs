@@ -20,7 +20,6 @@ namespace SuterShop
         private Timer _timer;
         private Timer _timerChat;
         private int _countGoods;
-        private int _lastMessageCount;
 
         public User CurrentUser
         {
@@ -45,10 +44,11 @@ namespace SuterShop
         public delegate void UpdateShopDelegate();
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
 
-        public delegate void UpdateChatDelegate(ChatMessage lastMessage);
+        public delegate void UpdateChatDelegate(List<ChatMessage> messages);
         public UpdateChatDelegate ChatMessageReceivedChanged { get; set; }
 
-        private ChatMessage _lastMessage = ChatMessage.Empty;
+        private List<ChatMessage> _lastMessages = new List<ChatMessage>();
+        private int _lastMessageCount = 0;
         public App()
         {
             _cs = "Server=192.168.88.54;Database=shop1337;Uid=root;Pwd=1q2w3e;";
@@ -65,18 +65,20 @@ namespace SuterShop
         private void TimerTickChat(object? state)
         {
             var db = new DataBaseContext(_cs);
-            var newMessageCount = db.ChatMessages.Count();
-            if (_lastMessageCount != newMessageCount)
+            var newMessagesCount = db.ChatMessages.Count();
+
+            if (_lastMessageCount != newMessagesCount) // если количество сообщений изменилось
             {
-                var lastMessage = db.ChatMessages.OrderBy(m => m.ID).LastOrDefault()?.Text;
-                if(lastMessage != _lastMessage)
+                var newMessages = db.ChatMessages.ToList();
+
+                if (!newMessages.SequenceEqual(_lastMessages)) // если получены новые сообщения
                 {
-                    _lastMessage = lastMessage;
-                    ChatMessageReceivedChanged?.Invoke(lastMessage);
+                    _lastMessages = newMessages;
+                    ChatMessageReceivedChanged?.Invoke(newMessages); // вызываем событие обновления чата и передаем список новых сообщений
                 }
-                
-            };
-            _lastMessageCount = newMessageCount;
+            }
+
+            _lastMessageCount = newMessagesCount; // обновляем количество сообщений
         }
 
         private void TimerTick(object? state)
