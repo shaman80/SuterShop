@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SuterShop.Chat.ViewModel
 {
@@ -20,7 +21,8 @@ namespace SuterShop.Chat.ViewModel
 
         private int _countMessage;
 
-        private string _cs = "Server=localhost;Database=shop;Uid=root;Pwd=1q2w3e;";
+        //private string _cs = "Server=localhost;Database=shop;Uid=root;Pwd=1q2w3e;";
+        private string _cs = "Server=192.168.88.54;Database=shopD;Uid=root;Pwd=1q2w3e;";
 
         private Timer _timer;
         public ChatViewModel()
@@ -42,13 +44,14 @@ namespace SuterShop.Chat.ViewModel
         }
         internal void SendChatMessage(string chatTextMessage)
         {
-            var chatMessage = new ChatMessage() 
-            { 
-               Message = chatTextMessage,
-               User = (Application.Current as IApp).CurrentUser,
-               Seller = Good.User,
-               GoodItem = Good,
-               SendUserIdMessage = (Application.Current as IApp).CurrentUser.Id
+            var chatMessage = new ChatMessage()
+            {
+                Message = chatTextMessage,
+                User = (Application.Current as IApp).CurrentUser,
+                Seller = Good.User,
+                GoodItem = Good,
+                SendUserIdMessage = (Application.Current as IApp).CurrentUser,
+                Time = DateTime.Now 
             };
             _db.ChatMessages.Add(chatMessage);
             _db.SaveChanges();
@@ -68,18 +71,45 @@ namespace SuterShop.Chat.ViewModel
             StackPanel.Children.Clear();
             foreach (var chatMessage in _chatMessage)
             {
-                if(((chatMessage.User.Id == _app.CurrentUser.Id) || (chatMessage.Seller.Id == _app.CurrentUser.Id)) && (chatMessage.GoodItem.Id == Good.Id) ) 
+                //if (((chatMessage.SendUserIdMessage == _app.CurrentUser) || (chatMessage.Seller.Id == _app.CurrentUser.Id)) && (chatMessage.GoodItem.Id == Good.Id))
+                if(_app.CurrentUser.Id == chatMessage.Seller.Id)
                 {
-                    var _textBlock = new TextBlock() { Text = chatMessage.Message };
-                    if(chatMessage.SendUserIdMessage == _app.CurrentUser.Id)
+                    if ((chatMessage.Seller.Id == _app.CurrentUser.Id) && (chatMessage.GoodItem.Id == Good.Id))
                     {
-                        _textBlock.HorizontalAlignment = HorizontalAlignment.Right;
+                        var _textBlockLogin = new TextBlock() { Text = chatMessage.SendUserIdMessage.Login + "   " + chatMessage.Time.ToShortTimeString() };
+                        var _textBlock = new TextBlock() { Text = chatMessage.Message };
+                        if (chatMessage.SendUserIdMessage.Id == _app.CurrentUser.Id)
+                        {
+                            _textBlockLogin.HorizontalAlignment = HorizontalAlignment.Right;
+                            _textBlock.HorizontalAlignment = HorizontalAlignment.Right;
+                            _textBlock.Background = new SolidColorBrush(Color.FromRgb(66, 224, 245));
+                        }
+                        StackPanel.Children.Add(_textBlockLogin);
+                        StackPanel.Children.Add(_textBlock);
                     }
+                }
+                //date1.ToShortTimeString()
+                else if(chatMessage.GoodItem.Id == Good.Id)
+                {
+                    //var _textBlockLogin = new TextBlock() { Text = chatMessage.SendUserIdMessage.Login + "   " + chatMessage.Time.TimeOfDay };
+                    var _textBlockLogin = new TextBlock() { Text = chatMessage.SendUserIdMessage.Login + "   " + (chatMessage.Time.ToShortTimeString()).ToString() };
+
+                   
+                    var _textBlock = new TextBlock() { Text = chatMessage.Message };
+                    if (chatMessage.SendUserIdMessage.Id == _app.CurrentUser.Id)
+                    {
+                        _textBlockLogin.HorizontalAlignment = HorizontalAlignment.Right;
+                        _textBlock.HorizontalAlignment = HorizontalAlignment.Right;
+                        _textBlock.Background = new SolidColorBrush(Color.FromRgb(66, 224, 245));
+                    }
+                    StackPanel.Children.Add(_textBlockLogin);
                     StackPanel.Children.Add(_textBlock);
                 }
 
             }
+
         }
+        
 
         internal void SetData(StackPanel stackPanel)
         {

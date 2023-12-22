@@ -85,6 +85,7 @@ namespace SuterShop
         public User User { get; set; }
         public User Seller { get; set; }
         public Goods GoodItem { get; set; }
-        public int SendUserIdMessage {  get; set; }
+        public User SendUserIdMessage {  get; set; }
+        public DateTime Time { get; set; }
     }
 }

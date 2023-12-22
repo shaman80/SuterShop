@@ -23,7 +23,10 @@
                             Grid.Row="0"
                             Margin="10"
                             >
+                    <TextBlock Name="loginChat"
+                           />
                     <TextBlock  Name="ChatTextBlock"
+                                Width="200"
                                 TextWrapping="Wrap"
                                 Margin="5"/>
                 </StackPanel>
