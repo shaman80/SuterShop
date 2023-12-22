@@ -18,7 +18,9 @@ namespace SuterShop
         private User currentUser;
 
         private Timer _timer;
+        private Timer _timerChat;
         private int _countGoods;
+        private int _lastMessageCount;
 
         public User CurrentUser
         {
@@ -42,6 +44,11 @@ namespace SuterShop
 
         public delegate void UpdateShopDelegate();
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
+
+        public delegate void UpdateChatDelegate(ChatMessage lastMessage);
+        public UpdateChatDelegate ChatMessageReceivedChanged { get; set; }
+
+        private ChatMessage _lastMessage = ChatMessage.Empty;
         public App()
         {
             _cs = "Server=192.168.88.54;Database=shop1337;Uid=root;Pwd=1q2w3e;";
@@ -51,9 +58,26 @@ namespace SuterShop
             CreateDefaultAdmin();
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null,0, 3000);
-          
+            _timerChat = new Timer(TimerTickChat, null,0, 1000);
+         
         }
 
+        private void TimerTickChat(object? state)
+        {
+            var db = new DataBaseContext(_cs);
+            var newMessageCount = db.ChatMessages.Count();
+            if (_lastMessageCount != newMessageCount)
+            {
+                var lastMessage = db.ChatMessages.OrderBy(m => m.ID).LastOrDefault()?.Text;
+                if(lastMessage != _lastMessage)
+                {
+                    _lastMessage = lastMessage;
+                    ChatMessageReceivedChanged?.Invoke(lastMessage);
+                }
+                
+            };
+            _lastMessageCount = newMessageCount;
+        }
 
         private void TimerTick(object? state)
         {

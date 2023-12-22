@@ -10,6 +10,7 @@ namespace SuterShop
         public UpdateUserDelegate UserIsLogining { get; set; }
         public UpdateCardDelegate GoodItemChanged { get; set; }
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
+        public UpdateChatDelegate ChatMessageReceivedChanged { get; set; }
         void filterCentral(List<Category> categoriesFilter);
     }
 }

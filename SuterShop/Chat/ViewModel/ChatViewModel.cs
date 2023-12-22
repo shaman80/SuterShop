@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -15,6 +16,7 @@ namespace SuterShop.Chat.ViewModel
     internal partial class ChatViewModel : ObservableObject
     {
         private DataBaseContext _db;
+            
         [ObservableProperty] private ObservableCollection<ChatMessage> chatMessages;
 
 
@@ -22,11 +24,19 @@ namespace SuterShop.Chat.ViewModel
         {
             _db = (Application.Current as IApp).Db;
             chatMessages = new ObservableCollection<ChatMessage>(_db.ChatMessages);
-
+            (Application.Current as IApp).ChatMessageReceivedChanged += RefreshChat;
             //RefreshChat();
         }
 
-
+        private void RefreshChat(ChatMessage lastMessage)
+        {
+            var messages = _db.ChatMessages.ToList();
+            chatMessages.Add(lastMessage);
+            foreach (var message in messages)
+            {
+                chatMessages.Add(message);
+            }
+        }
 
         public void SendMessage(ChatMessage newMessage)
         {
@@ -42,17 +52,7 @@ namespace SuterShop.Chat.ViewModel
             _db.ChatMessages.Add(newMessage);
             _db.SaveChanges();
             chatMessages.Add(newMessage);
-            RefreshChat();
-        }
-
-        public void RefreshChat()
-        {       
-            var messages = _db.ChatMessages.ToList();
-            chatMessages.Clear();    
-            foreach (var message in messages)
-            {
-                chatMessages.Add(message);
-            }
+            
         }
 
         internal void SetData(GoodsForSale goodItem)
