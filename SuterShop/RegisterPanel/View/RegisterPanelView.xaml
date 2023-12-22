@@ -11,7 +11,7 @@
         Title="RegisterPanelView">
     <Grid>
         <Border Margin="5" Name="loginPanel" Visibility="Visible" BorderBrush="DarkGray" BorderThickness="1" Width="250">
-            <StackPanel Background="AntiqueWhite" Orientation="Vertical" >
+            <StackPanel Background="#FF2B5B4B" Orientation="Vertical" >
                 <TextBlock  Text="Логин" Margin="5,5,5,0"/>
                 <TextBox Name="userLogin" Margin="5"/>
                 <TextBlock Text="Email" Margin="5,5,5,0"/>

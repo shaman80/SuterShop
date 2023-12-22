@@ -23,6 +23,7 @@ namespace SuterShop.Feedback.View
         private User _user;
         private List<Message> _messages = new List<Message>();
         private DataBaseContext _db;
+        private GoodsForSale _goodsItem;
 
         public FeedbackView()
         {
@@ -34,37 +35,26 @@ namespace SuterShop.Feedback.View
                 AddFeedbackBtn.Visibility = Visibility.Visible;
             }
             _db = (Application.Current as IApp).Db;
+        }
+               
+        internal void SetData(GoodsForSale goodItem)
+        {
+            _goodsItem = goodItem;
+            itemName.Content = goodItem.Name;
+            itemCategory.Content = goodItem.Category.ToString();
+            itemDescription.Content = goodItem.Description;
+
             _messages ??= new List<Message>();//ЕСЛИ messages = null, то этой строкой инициализируем этот массив
             _messages = _db.Messages.ToList();
 
             foreach (var message in _messages)
             {
-                //if (GoodsItem.Id == message.Id)
-                //{
+                if (_goodsItem.Id == message.GoodsItem.Id)
+                {
                     feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
-                //}
+                }
 
             }
-        }
-               
-        internal void SetData(GoodsForSale goodItem)
-        {
-            itemName.Content = goodItem.Name;
-            itemCategory.Content = goodItem.Category.ToString();
-            itemDescription.Content = goodItem.Description;
-
-            //_db = (Application.Current as IApp).Db;
-            //_messages ??= new List<Message>();//ЕСЛИ messages = null, то этой строкой инициализируем этот массив
-            //_messages = _db.Messages.ToList();
-
-            //foreach (var message in _messages)
-            //{
-            //    if(goodItem.Id == message.Id)
-            //    {
-            //        feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
-            //    }
-                
-            //}
         }
 
         private void AddFeedbackMessage(object sender, RoutedEventArgs e)
@@ -75,6 +65,7 @@ namespace SuterShop.Feedback.View
             {
                  MessageText = newFeedbackMessage.Text,
                  Sender = _user.Login,
+                 GoodsItem = _goodsItem,
             };
 
             _db = (Application.Current as IApp).Db;

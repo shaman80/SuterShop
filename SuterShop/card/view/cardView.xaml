@@ -9,7 +9,7 @@
         <local1:cardViewModel></local1:cardViewModel>
     </UserControl.DataContext>
 
-    <StackPanel Margin="5" Orientation="Vertical">
+    <StackPanel Margin="5" Orientation="Vertical" Background="#FF2B5B4B">
 
         <Button Name="EditGoodsItem"  
                 Visibility="Hidden"
