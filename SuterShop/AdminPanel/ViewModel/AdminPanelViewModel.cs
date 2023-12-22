@@ -19,6 +19,7 @@ namespace SuterShop.AdminPanel.ViewModel
         public AdminPanelViewModel()
         {
             _db = (Application.Current as IApp).Db;
+          
         }
 
         internal void AddNewSeller(User seller)

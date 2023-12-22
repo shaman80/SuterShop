@@ -3,34 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SuterShop.Chat"
+             xmlns:local="clr-namespace:SuterShop.Chat" xmlns:converter="clr-namespace:SuterShop.Chat.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <local:ChatViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <converter:backgroundUserChatConverter x:Key="backgroundUserChatConverter"></converter:backgroundUserChatConverter>
+        <converter:dataConverter x:Key="dataConverter"/>
+        <converter:nameConverter x:Key="nameConverter"/>
+    </UserControl.Resources>
     <ScrollViewer x:Name="scroll">
         <StackPanel Orientation="Vertical" >
             <ItemsControl ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="15,0,15,10" CornerRadius="16" Background="Gray" Padding="10">
+                        <Border Margin="15,0,15,10" CornerRadius="16" Background="{Binding user.Id, Converter={StaticResource  backgroundUserChatConverter} }" Padding="10">
                             <StackPanel Orientation="Vertical" >
                                 <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="LightGreen"/>
-                                    <TextBlock  Width="150" Text="{Binding data}"/>
+                                    <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="#582C0B" Visibility="{Binding user.Id,Converter={StaticResource nameConverter}}"/>
+                                    
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Margin="5"  Text="{Binding text}"/>
+                                    <TextBlock Margin="5" TextWrapping="Wrap" Width="200" Text="{Binding text}"/>
                                 </StackPanel>
+                                <TextBlock HorizontalAlignment="Right"  Text="{Binding data, Converter={StaticResource  dataConverter} }"/>
                             </StackPanel>
+                            
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Center">
                 <Border CornerRadius="12" Background="LightGray">
-                    <TextBox Name ="BoxMessage" Width="150" Height="40" SelectionChanged="TextChanged"/>
+                    <TextBox Name ="BoxMessage" TextWrapping="Wrap" Width="150" Height="40" SelectionChanged="TextChanged"/>
                 </Border>
                 <Border CornerRadius="50" Background="LightGray">
                     <Button Width="40" Content="send" Height="40" Click="SendMessage" Name ="MessageButton" IsEnabled="False"/>

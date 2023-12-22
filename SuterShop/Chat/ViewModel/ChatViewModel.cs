@@ -17,6 +17,7 @@ namespace SuterShop.Chat
         public ChatViewModel()
         {
             (Application.Current as IApp).MessageItemCountChanged += GoodMessageCountChanged;
+            (Application.Current as IApp).UserIsLogining += SetData;
         }
 
         private void GoodMessageCountChanged()
@@ -29,6 +30,10 @@ namespace SuterShop.Chat
         public void SetData()
         {
             Messages = new ObservableCollection<Message> ((Application.Current as IApp).Db.Messages.Include("user").OrderBy(x => x.data).ToList());
+        }
+        public void SetData(User user)
+        {
+            Messages = new ObservableCollection<Message>((Application.Current as IApp).Db.Messages.Include("user").OrderBy(x => x.data).ToList());
         }
 
         internal void AddMessage(string text)

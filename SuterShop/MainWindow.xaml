@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:SuterShop" 
         xmlns:viewmodel="clr-namespace:SuterShop.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#e2e9e9">
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="4*"/>
