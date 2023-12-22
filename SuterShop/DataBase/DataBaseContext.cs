@@ -67,11 +67,10 @@ namespace SuterShop
 
     public class Message
     {
-        internal string messageText;
-
         public int Id { get; set; }
         public string MessageText { get; set; }
         public string Sender { get; set; }
+        public Goods GoodsItem { get; set; }
     }
     public class User
     {

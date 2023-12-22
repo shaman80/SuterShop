@@ -20,36 +20,71 @@ namespace SuterShop.Feedback.View
     /// </summary>
     public partial class FeedbackView : Window
     {
+        private User _user;
+        private List<Message> _messages = new List<Message>();
+        private DataBaseContext _db;
+
         public FeedbackView()
         {
             InitializeComponent();
+
+            _user = (Application.Current as IApp).CurrentUser;
+            if(_user != null)
+            {
+                AddFeedbackBtn.Visibility = Visibility.Visible;
+            }
+            _db = (Application.Current as IApp).Db;
+            _messages ??= new List<Message>();//ЕСЛИ messages = null, то этой строкой инициализируем этот массив
+            _messages = _db.Messages.ToList();
+
+            foreach (var message in _messages)
+            {
+                //if (GoodsItem.Id == message.Id)
+                //{
+                    feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
+                //}
+
+            }
         }
-  
-        
+               
         internal void SetData(GoodsForSale goodItem)
         {
-            //var dir = $"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}TempImages{System.IO.Path.DirectorySeparatorChar}";
-            //var fileName = $"{goodItem.Category.Id}_{goodItem.Id}.png";
-            //if (!File.Exists($"{dir}{fileName}"))
-            //{
-            //    File.WriteAllBytes($"{dir}{fileName}", goodItem.Image);
-            //}
             itemName.Content = goodItem.Name;
-            itemCategory.Content = goodItem.Category;
+            itemCategory.Content = goodItem.Category.ToString();
             itemDescription.Content = goodItem.Description;
-            //itemImage.Source = new BitmapImage(new Uri(fileName));
+
+            //_db = (Application.Current as IApp).Db;
+            //_messages ??= new List<Message>();//ЕСЛИ messages = null, то этой строкой инициализируем этот массив
+            //_messages = _db.Messages.ToList();
+
+            //foreach (var message in _messages)
+            //{
+            //    if(goodItem.Id == message.Id)
+            //    {
+            //        feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
+            //    }
+                
+            //}
         }
 
         private void AddFeedbackMessage(object sender, RoutedEventArgs e)
         {
+            if (_user == null) return;
+                
             var message = new Message
             {
-                messageText = newFeedbackMessage.Text,
+                 MessageText = newFeedbackMessage.Text,
+                 Sender = _user.Login,
             };
-            var db = (Application.Current as IApp).Db;
-            db.Messages.Add(message);
-            db.SaveChanges();
-            feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
-        }
+
+            _db = (Application.Current as IApp).Db;
+            _db.Messages.Add(message);
+            _db.SaveChanges();
+            feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText, Margin = new Thickness(5) });
+            newFeedbackMessage.Text = String.Empty;
+           
+            
+        }                     
     }
 }
+

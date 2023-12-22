@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuterShop.Feedback.View" xmlns:viewmodel="clr-namespace:SuterShop.Feedback.ViewModel"
         mc:Ignorable="d"
-        Title="FeedbackView" Height="650" Width="500">
+        Title="FeedbackView" Height="450" Width="500">
     <Window.DataContext>
         <viewmodel:FeedbackViewModel/>
     </Window.DataContext>
@@ -25,13 +25,16 @@
             <Label Name="itemDescription" VerticalAlignment="Top" Margin="10, 90, 10, 10" BorderThickness="2" BorderBrush="#FF3A4E3A"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
-            <WrapPanel Name="feedbackMessagesPanel"></WrapPanel>
+            <ScrollViewer>
+                <WrapPanel Name="feedbackMessagesPanel" Orientation="Vertical"></WrapPanel>
+            </ScrollViewer>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2">
             <TextBox Name="newFeedbackMessage" Height="100" Width="330" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10"></TextBox>
             <Button Content="Отправить отзыв" Background="#FF2B5B4B"
-                    Height="30" Width="100"
+                    Height="30" Width="100" Visibility="Hidden"
                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"
+                    Name="AddFeedbackBtn"
                     Click="AddFeedbackMessage"/>
         </Grid>
     </Grid>
