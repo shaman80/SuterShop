@@ -13,6 +13,7 @@ namespace SuterShop
         public DbSet<Category> Category { get; set; }       
         public DbSet<Message> Messages { get; set; }       
         public DbSet<User> Users { get; set; }
+        public DbSet<OnlineUser> OnlineUsers { get; set; }
         private string _cs { get; set; }
         public DataBaseContext(string cs)
         {
@@ -75,6 +76,12 @@ namespace SuterShop
         public int Discount { get; set; }
         public int sum { get; set; }
         public Statuses Status { get; set; }
+    }
+    public class OnlineUser
+    {
+        public int Id { get;set; }
+        public User user { get; set; }
+        public DateTime timer { get; set; }
     }
     public class GoodsForSale : Goods { }
     public class SoldGoods : Goods { }

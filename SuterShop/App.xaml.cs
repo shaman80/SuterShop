@@ -19,6 +19,9 @@ namespace SuterShop
         private User currentUser;
 
         private Timer _timer;
+
+        public Timer TimerOnline { get; }
+
         private int _countGoods;
         private int _countMessages;
 
@@ -32,7 +35,6 @@ namespace SuterShop
             }
         }
 
-        private string _cs;
 
         public DataBaseContext Db { get; set; }
 
@@ -50,17 +52,20 @@ namespace SuterShop
         {
             cs = "Server=192.168.88.54;Database=sfy;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(cs);
-           // Db.Database.EnsureDeleted();
+            Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
+            
             CreateDefaultAdmin();
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null,0, 3000);
-          
+            TimerOnline = new Timer(trackingOnlineStatuses,null, 0, 30000);
         }
 
         private void TimerTick(object? state)
         {
-            var countGoods = Db.GoodsForSaleList.Count();
+            var _db = new DataBaseContext(cs);
+            var countGoods = _db.GoodsForSaleList.Count();
+            var countMessages = _db.Messages.Count();
             if (_countGoods != countGoods)
             {
                 GoodItemCountChanged?.Invoke();
@@ -71,6 +76,33 @@ namespace SuterShop
                 MessageItemCountChanged?.Invoke();
             };
             _countMessages = countMessages;
+        }
+        private void trackingOnlineStatuses(object? state)
+        {
+            var _db = new DataBaseContext(cs);
+            var t = 0;
+            if (CurrentUser != null)
+            {
+                foreach(var elem in _db.OnlineUsers) 
+                {
+                    if (elem.user.Id == CurrentUser.Id)
+                    {
+                        elem.timer = DateTime.Now;
+                        _db.OnlineUsers.Update(elem);
+                        
+                       
+                        t = 1;
+                    }
+                }
+                if (t == 0)
+                {
+                    var temp = new OnlineUser { user = CurrentUser, timer = DateTime.Now };
+                    _db.OnlineUsers.Add(temp);
+     
+                }
+                _db.SaveChanges();
+            }
+           
         }
 
         private void CreateDefaultAdmin()
