@@ -29,6 +29,9 @@ namespace SuterShop
                 currentUser = value;
             }
         }
+
+        private string _cs;
+
         public DataBaseContext Db { get; set; }
 
         public delegate void UpdateUserDelegate(User user);
@@ -41,8 +44,8 @@ namespace SuterShop
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
         public App()
         {
-            var cs = "Server=192.168.88.54;Database=shop1337;Uid=root;Pwd=1q2w3e;";
-            Db = new DataBaseContext(cs);
+            _cs = "Server=192.168.88.54;Database=shop1337;Uid=root;Pwd=1q2w3e;";
+            Db = new DataBaseContext(_cs);
             //Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
             CreateDefaultAdmin();
@@ -54,7 +57,8 @@ namespace SuterShop
 
         private void TimerTick(object? state)
         {
-            var countGoods = Db.GoodsForSaleList.Count();
+            var db = new DataBaseContext(_cs);
+            var countGoods = db.GoodsForSaleList.Count();
             if (_countGoods != countGoods)
             {
                 GoodItemCountChanged?.Invoke();
