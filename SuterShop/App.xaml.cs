@@ -49,8 +49,8 @@ namespace SuterShop
 
         public App()
         {
-            _cs = "Server=192.168.88.54;Database=shopD;Uid=root;Pwd=1q2w3e;";
-            //_cs = "Server=localhost;Database=shop;Uid=root;Pwd=1q2w3e;";
+            //_cs = "Server=192.168.88.54;Database=shopD;Uid=root;Pwd=1q2w3e;";
+            _cs = "Server=localhost;Database=shopD;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(_cs);
             //Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();

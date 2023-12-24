@@ -21,14 +21,23 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Name="StackPanel"
                             Grid.Row="0"
-                            Margin="10"
-                            >
-                    <TextBlock Name="loginChat"
-                           />
-                    <TextBlock  Name="ChatTextBlock"
-                                Width="200"
-                                TextWrapping="Wrap"
-                                Margin="5"/>
+                            Margin="10">
+                    <Border BorderThickness="1"
+                            BorderBrush="LightBlue"
+                            Background="LightBlue"
+                            CornerRadius="20"
+                            Width="250">
+                        <StackPanel>
+                        <TextBlock Name="loginChat"
+                                    />
+                        <TextBlock  Name="ChatTextBlock"
+                                        Width="200"
+                                        TextWrapping="Wrap"
+                                        Margin="5"/>
+                    </StackPanel>
+                    </Border>
+                   
+                    
                 </StackPanel>
             </ScrollViewer>
            
@@ -41,7 +50,7 @@
             </Grid.ColumnDefinitions>
             <TextBox Name="ChatTextBox" Grid.Column="0"
                      Grid.Row="1"
-                     Width="270"
+                     Width="260"
                      Margin="-30,5,0,5"/>  
             <Button Grid.Column="1"
                     Grid.Row="1"
