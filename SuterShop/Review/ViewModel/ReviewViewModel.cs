@@ -29,7 +29,7 @@ namespace SuterShop.Review
         internal void SetCurrentGood(GoodsForSale goodForSale)
         {
             _goodForSale = goodForSale;
-
+            LoadMessages();
 
         }
 
