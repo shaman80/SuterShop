@@ -30,6 +30,7 @@ namespace SuterShop
                 currentUser = value;
             }
         }
+        
 
         private string _cs;
 

@@ -4,6 +4,7 @@ using SuterShop.LoginingPanel.ViewModel;
 using SuterShop.RegisterPanel.View;
 using SuterShop.RegisterPanel.ViewModel;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SuterShop
 {
@@ -56,6 +57,11 @@ namespace SuterShop
                 LogoutBtn.Visibility = Visibility.Visible;
                 OpenAdminPanelBtn.Visibility = Visibility.Visible;
             }
+        }
+
+        private void Tema(object sender, RoutedEventArgs e)
+        {
+            this.Background = new SolidColorBrush(Colors.DimGray);    
         }
     }
 }

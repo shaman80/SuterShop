@@ -28,12 +28,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110"/>
                 <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
             
             <Button Margin="5" 
                     Width="100"
                     Grid.Column="0"
-                    Content="Регирстрация"
+                    Content="Регистрация"
                     Name="RegisterBtn"
                     Click="Register"/>
             <Button Margin="5" 
@@ -56,8 +57,15 @@
                     Name="LogoutBtn"
                     Content="Выход"
                     Click="Logout"/>
-            
+            <Button Margin="5"
+                    Width="100"
+                    Grid.Column="3"
+                    Content="Изменить тему"
+                    Name="TemaBtn"
+                    Click="Tema"/>
+
         </Grid>
+        
         <UserControl Grid.Column="0" 
                      Grid.Row="1" 
                      Content="{Binding LeftPanel, UpdateSourceTrigger=PropertyChanged}"
