@@ -21,7 +21,7 @@ namespace SuterShop
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql(_cs, new MySqlServerVersion(new Version(8, 0, 35)));
+                optionsBuilder.UseMySql(_cs, new MySqlServerVersion(new Version(8, 1, 0)));
             }
         }
 
