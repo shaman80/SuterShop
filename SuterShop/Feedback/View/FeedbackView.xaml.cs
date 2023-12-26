@@ -41,7 +41,7 @@ namespace SuterShop.Feedback.View
         {
             _goodsItem = goodItem;
             itemName.Content = goodItem.Name;
-            itemCategory.Content = goodItem.Category.ToString();
+            itemCategory.Content = goodItem.Category.Name;
             itemDescription.Content = goodItem.Description;
 
             _messages ??= new List<Message>();//ЕСЛИ messages = null, то этой строкой инициализируем этот массив
