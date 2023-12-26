@@ -30,7 +30,7 @@ namespace SuterShop.LoginingPanel.View
             var users = db.Users.ToList();
             foreach (var user in users)
             {
-                if (user.Login == userLogin.Text && user.Password == userPassword.Text)
+                if (user.Login == userLogin.Text && user.Password == userPassword.Password)
                 {
                     (Application.Current as IApp)!.CurrentUser = user;
                     Close();

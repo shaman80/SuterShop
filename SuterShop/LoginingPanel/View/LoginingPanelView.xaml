@@ -15,7 +15,11 @@
                 <TextBlock  Text="Логин" Margin="5,5,5,0"/>
                 <TextBox Name="userLogin" Margin="5"/>
                 <TextBlock Text="Пароль" Margin="5,5,5,0"/>
-                <TextBox Name="userPassword" Margin="5,5,5,15"/>
+                <PasswordBox Name="userPassword" 
+                             Margin="5,5,5,15" 
+                             VerticalAlignment="Top"
+                             MaxLength="25" 
+                             PasswordChar="*" />
                 <Button Click="Logining" Content="Войти" Margin="5"></Button>
             </StackPanel>
         </Border>
