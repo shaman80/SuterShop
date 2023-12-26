@@ -16,15 +16,40 @@ namespace SuterShop.AdminPanel.ViewModel
         [ObservableProperty] private User user;
         [ObservableProperty] private ObservableCollection<Category> categories;
         [ObservableProperty] private ObservableCollection<User> sellers;
+        [ObservableProperty] private ObservableCollection<Goods> report;
         public AdminPanelViewModel()
         {
             _db = (Application.Current as IApp).Db;
         }
 
+
+
         internal void AddNewSeller(User seller)
         {
             _db.Users.Add(seller);
             _db.SaveChanges();
+        }
+
+        internal void LoadReport()
+        {
+            Report = new ObservableCollection<Goods>();
+
+            var  listReport = _db.GoodsList.ToList();
+
+            foreach (Goods report in listReport)
+            {
+                if (report.User.Id == (Application.Current as IApp).CurrentUser.Id)
+                {
+                    Report.Add(report);
+                }
+            }
+            //Sellers = new ObservableCollection<User>();
+            //var listSellers = _db.Users.ToList();
+            //foreach (User seller in listSellers)
+            //{
+            //    if (seller.Status != Statuses.Seller) continue;
+            //    Sellers.Add(seller);
+            //}
         }
 
         internal void LoadSellers()

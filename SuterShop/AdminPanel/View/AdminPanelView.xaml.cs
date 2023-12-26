@@ -20,6 +20,7 @@ namespace SuterShop.AdminPanel.View
         {
             InitializeComponent();
             TestCurrentUser();
+            LoadReport();
         }
 
         private void TestCurrentUser()
@@ -73,6 +74,10 @@ namespace SuterShop.AdminPanel.View
         private void LoadCategoryes()
         {
             (DataContext as AdminPanelViewModel).LoadCategoryes();
+        }
+        private void LoadReport()
+        {
+            (DataContext as AdminPanelViewModel).LoadReport();
         }
 
         private void LoadSellers()

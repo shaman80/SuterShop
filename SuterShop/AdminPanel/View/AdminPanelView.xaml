@@ -77,7 +77,7 @@
                 </TabItem>
             </TabControl>
         </StackPanel>
-        <StackPanel Name="sellerPanel" Visibility="Hidden" Orientation="Vertical">
+        <StackPanel Name="sellerPanel" Visibility="Visible" Orientation="Vertical">
             <TabControl>
                 <TabItem>
                     <TabItem.Header>
@@ -194,6 +194,24 @@
                                  VerticalAlignment="Bottom" 
                                  Content="Добавить" />
                     </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Text="Отчёт" Margin="5"/>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <DataGrid 
+                            ItemsSource="{Binding Report, UpdateSourceTrigger=PropertyChanged}"
+                            Grid.Row="1" 
+                            AutoGenerateColumns="False" 
+                            Margin="10">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id Товара" Binding="{Binding Id }"  />
+                                <DataGridTextColumn Header="Количество" Binding="{Binding Count }"/>
+                                    <DataGridTextColumn Header="Продано" Binding="{Binding SoldCount}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>
