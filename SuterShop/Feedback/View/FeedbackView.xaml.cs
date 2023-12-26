@@ -51,7 +51,7 @@ namespace SuterShop.Feedback.View
             {
                 if (_goodsItem.Id == message.GoodsItem.Id)
                 {
-                    feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText });
+                    feedbackMessagesPanel.Children.Add(new TextBox { Text = message.MessageText, Margin = new Thickness(5) });
                 }
 
             }
