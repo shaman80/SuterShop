@@ -42,7 +42,7 @@ namespace SuterShop.Review
 
             foreach (Message message in listMessages)
             {
-                if (message.GoodsItem. != _goodForSale.Id) continue;
+                if (message.GoodsItem.Id != _goodForSale.Id) continue;
                 Messages.Add(message);
             }
         }
