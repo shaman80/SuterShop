@@ -3,6 +3,7 @@ using SuterShop.LoginingPanel.View;
 using SuterShop.LoginingPanel.ViewModel;
 using SuterShop.RegisterPanel.View;
 using SuterShop.RegisterPanel.ViewModel;
+using SuterShop.UserProfile.View;
 using System.Windows;
 
 namespace SuterShop
@@ -19,8 +20,19 @@ namespace SuterShop
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            var view = new AdminPanelView();
-            view.ShowDialog();
+            var user = (Application.Current as IApp).CurrentUser;
+            if (user.Status == Statuses.Admin)
+            {
+                var view = new AdminPanelView();
+                view.ShowDialog();
+            }
+            else if(user.Status == Statuses.Buyer)
+            {
+                var view = new UserProfileView();
+                view.ShowDialog();
+                view.SetData(user);
+            }
+            
         }
 
         private void Logout(object sender, RoutedEventArgs e)

@@ -1,0 +1,45 @@
+﻿<Window x:Class="SuterShop.UserProfile.View.UserProfileView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SuterShop.UserProfile.View" xmlns:viewmodel="clr-namespace:SuterShop.UserProfile.ViewModel"
+        mc:Ignorable="d"
+        Title="Личный кабинет пользователя" Height="450" Width="600">
+    <Window.DataContext>
+        <viewmodel:UserProfileViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Name="userPanel" Orientation="Vertical">
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Text="Личная информация" Margin="5"/>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock Text="Логин" Margin="5,5,5,0"/>
+                        <TextBox Name="login" Margin="5" BorderBrush="Black" BorderThickness="2" Height="30" />
+                        <TextBlock Text="Полное имя" Margin="5, 5, 5,0"/>
+                        <TextBox Name="fullName" Margin="5" BorderBrush="Black" BorderThickness="2" Height="30" />
+                        <TextBlock Text="Электронная почта" Margin="5,5,5,0"/>
+                        <TextBox Name="email" Margin="5" BorderBrush="Black" BorderThickness="2" Height="30" />
+                        <Button Content="Редактировать информацию" Width="200" BorderBrush="Black" BorderThickness="2" Margin="25" />
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Text="Избранное" Margin="5"/>
+                    </TabItem.Header>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Text="Корзина" Margin="5"/>
+                    </TabItem.Header>
+                </TabItem>
+                
+            </TabControl>
+        </StackPanel>
+    </Grid>
+</Window>
