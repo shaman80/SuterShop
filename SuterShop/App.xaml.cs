@@ -52,7 +52,15 @@ namespace SuterShop
             CreateDefaultAdmin();
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null,0, 3000);
-          
+
+            var d1 = new ResourceDictionary { Source = new Uri("pack://application:,,,/Themes/Core.xaml") };
+            var d2 = new ResourceDictionary { Source = new Uri("pack://application:,,,/Themes/Brushes.xaml") };
+            var d3 = new ResourceDictionary { Source = new Uri("pack://application:,,,/Themes/Icons.xaml") };
+            var dict1 = new ResourceDictionary();
+            dict1.MergedDictionaries.Add(d1);
+            dict1.MergedDictionaries.Add(d2);
+            dict1.MergedDictionaries.Add(d3);
+           // Resources = dict1;
         }
 
         private void TimerTick(object? state)

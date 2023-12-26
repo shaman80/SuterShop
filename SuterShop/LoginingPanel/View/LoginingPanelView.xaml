@@ -8,7 +8,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Title="LoginingPanelView">
+        Title="Авторизация">
     <Grid>
         <Border Margin="5" Name="loginPanel" Visibility="Visible" BorderBrush="DarkGray" BorderThickness="1" Width="250" Height="150">
             <StackPanel Background="AntiqueWhite" Orientation="Vertical" >
