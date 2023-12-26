@@ -60,6 +60,7 @@ namespace SuterShop.card.view
             var image = (sender as Image);
             var goodForSale = (image.DataContext as cardViewModel).Good;
 
+
             image.ContextMenu = new ContextMenu();
             var menuItem = new MenuItem
             {
