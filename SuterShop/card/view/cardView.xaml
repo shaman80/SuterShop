@@ -33,15 +33,22 @@
                     Grid.Column="0"/>
             <Button Content="О товаре" 
                     Click="OpenDescription" 
-                    Width="50" 
+                    Width="70" 
                     Margin="5" 
                     HorizontalAlignment="Right"/>
             
         </StackPanel>
-        <StackPanel>
+        <StackPanel Orientation="Vertical">
+            <Button Content="Просмотреть отзывы" 
+                    Name="ShowReviewBtn" 
+                    Click="ShowReview" 
+                    Width="130" 
+                    Margin="5" 
+                    HorizontalAlignment="Center"
+                    Visibility="Visible"/>
             <Button Content="Оставить отзыв" 
                     Name="ReviewBtn" 
-                    Click="OpenReview" 
+                    Click="MakeReview" 
                     Width="90" 
                     Margin="5" 
                     HorizontalAlignment="Center"

@@ -11,6 +11,7 @@ namespace SuterShop
         public DbSet<SoldGoods> SoldGoodsList { get; set; }
         public DbSet<Category> Category { get; set; }       
         public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
         private string _cs { get; set; }
         public DataBaseContext(string cs)
         {
@@ -34,6 +35,13 @@ namespace SuterShop
                 .HasValue<SoldGoods>("Sold")
                 .HasValue<GoodsForSale>("ForSale");
             });
+
+            
+
+            // Другие конфигурации модели могут быть добавлены здесь
+
+            base.OnModelCreating(modelBuilder);
+
             //modelBuilder.Entity<User>(pc =>
             //{
             //    //создаем дискриминатор
@@ -55,6 +63,7 @@ namespace SuterShop
         public int Count { get; set; } //количество товара
         public Category Category { get; set; }
         public User User { get; set; }
+        
     }
     public class Category
     {
@@ -75,4 +84,19 @@ namespace SuterShop
     }
     public class GoodsForSale : Goods { }
     public class SoldGoods : Goods { }
+
+
+    public class Message
+    {
+        public int MessageId { get; set; }
+                
+        public string MessageText { get; set; }
+
+        public DateTime DateAdded { get; set; }
+
+        public Goods GoodsItem { get; set; }
+
+        public User Sender { get; set; }
+
+    }
 }

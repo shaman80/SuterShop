@@ -1,5 +1,7 @@
 ﻿using SuterShop.AdminPanel.View;
 using SuterShop.card.viewModel;
+using SuterShop.Feedback;
+using SuterShop.Review;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -103,9 +105,27 @@ namespace SuterShop.card.view
 
         }
 
-        private void OpenReview(object sender, RoutedEventArgs e)
+        private void MakeReview(object sender, RoutedEventArgs e)
+        {
+            var makeRewiev = new FeedbackView { DataContext = new FeedbackViewModel() };
+
+            makeRewiev.ShowDialog();
+
+           
+        }
+
+        private void ShowReview(object sender, RoutedEventArgs e)
         {
 
+            var goodForSale = ((sender as Control).DataContext as cardViewModel).Good;
+
+            var makeRewiev = new ReviewView { DataContext = new ReviewViewModel() };
+
+
+
+            (makeRewiev.DataContext as ReviewViewModel).SetCurrentGood(goodForSale);
+
+            makeRewiev.ShowDialog();
         }
     }
 }

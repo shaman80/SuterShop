@@ -32,6 +32,7 @@ namespace SuterShop.AdminPanel.ViewModel
         internal void LoadSellers()
         {
             Sellers = new ObservableCollection<User>();
+
             var listSellers = _db.Users.ToList();
             foreach (User seller in listSellers)
             {

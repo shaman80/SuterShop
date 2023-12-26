@@ -41,7 +41,10 @@ namespace SuterShop
                 LogoutBtn.Visibility = Visibility.Visible;
                 OpenAdminPanelBtn.Visibility = Visibility.Visible;
             }
+
+
         }
+
 
         
     }

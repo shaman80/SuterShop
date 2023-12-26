@@ -9,6 +9,20 @@
         <review:ReviewViewModel/>
     </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Product Reviews" FontWeight="Bold" FontSize="16" Margin="10"/>
+
+        <DataGrid ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}"  x:Name="dataGridReviews" Grid.Row="1" AutoGenerateColumns="False" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Goods ID" Binding="{Binding GoodsItem}" />
+                <DataGridTextColumn Header="Feedback Text" Binding="{Binding MessageText}" />
+                <DataGridTextColumn Header="Date Added" Binding="{Binding DateAdded}" />
+                <DataGridTextColumn Header="Sender Id" Binding="{Binding Sender}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
