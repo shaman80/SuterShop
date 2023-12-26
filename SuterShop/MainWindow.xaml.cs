@@ -10,6 +10,7 @@ namespace SuterShop
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 1234
     public partial class MainWindow : Window
     {
         public MainWindow()
