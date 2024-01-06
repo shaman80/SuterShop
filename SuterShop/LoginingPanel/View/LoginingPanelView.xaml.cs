@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,17 +28,23 @@ namespace SuterShop.LoginingPanel.View
 
         private void Logining(object sender, RoutedEventArgs e)
         {
-            var db = (Application.Current as IApp).Db;
-            var users = db.Users.ToList();
-            foreach (var user in users)
-            {
-                if (user.Login == userLogin.Text && user.Password == userPassword.Text)
+
+
+                var db = (Application.Current as IApp).Db;
+                var users = db.Users.ToList();
+                foreach (var user in users)
                 {
-                    (Application.Current as IApp)!.CurrentUser = user;
-                    Close();
-                    return;
+                    if (user.Login == userLogin.Text && user.Password == userPassword.Text)
+                    {
+                        (Application.Current as IApp)!.CurrentUser = user;
+                        Close();
+                        return;
+                    }
                 }
-            }
+
+            
+
+
         }
     }
 }

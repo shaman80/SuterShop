@@ -26,19 +26,21 @@
               HorizontalAlignment="Right"
               Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="310" />
+
                 <ColumnDefinition Width="110"/>
                 <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
             
             <Button Margin="5" 
                     Width="100"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Content="Регирстрация"
                     Name="RegisterBtn"
                     Click="Register"/>
             <Button Margin="5" 
                     Width="100" 
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Content="Войти"
                     Name="LoginingBtn"
                     Click="Logining"/>
@@ -46,17 +48,21 @@
                     Name="OpenAdminPanelBtn"
                     Visibility="Hidden"
                     Width="100" 
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Content="Личный кабинет"
                     Click="OpenAdminPanel"/>
             <Button Margin="5" 
                     Width="100" 
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Visibility="Hidden"
                     Name="LogoutBtn"
                     Content="Выход"
                     Click="Logout"/>
-            
+            <TextBlock Text="{Binding CurrentUser.FullName, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="5,5,100,5"/>
+
         </Grid>
         <UserControl Grid.Column="0" 
                      Grid.Row="1" 
