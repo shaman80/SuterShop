@@ -3,6 +3,7 @@ using SuterShop.LoginingPanel.View;
 using SuterShop.LoginingPanel.ViewModel;
 using SuterShop.RegisterPanel.View;
 using SuterShop.RegisterPanel.ViewModel;
+using SuterShop.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,31 +52,8 @@ namespace SuterShop
 
         private void Logining()
         {
-            if (File.Exists(fileName))
-            {
-                var jsonRead = File.ReadAllText(fileName);
-                if (jsonRead != "")
-                {
-                    userGuidJson = JsonSerializer.Deserialize<UserGuid>(jsonRead);
-                }
-            }
-            var time = DateTime.Now.Subtract(userGuidJson.LifeTime);
-            var guid = db.UserGuids.OrderByDescending(u => u.Guid).FirstOrDefault();
-
-            if ((guid?.Guid == userGuidJson.Guid) && time.Minutes < 5)
-            {
-                (Application.Current as IApp).CurrentUser = db.Users.Find(userGuidJson.UserId);
-                guid.LifeTime = DateTime.Now;
-                db.SaveChanges();
-            }
-
-            if ((Application.Current as IApp).CurrentUser != null)
-            {
-                LoginingBtn.Visibility = Visibility.Hidden;
-                RegisterBtn.Visibility = Visibility.Hidden;
-                LogoutBtn.Visibility = Visibility.Visible;
-                OpenAdminPanelBtn.Visibility = Visibility.Visible;
-            }
+            (DataContext as MainWindowViewModel).Logining(fileName, LoginingBtn, RegisterBtn, LogoutBtn, OpenAdminPanelBtn);
+          
         }
         private void Logining(object sender, RoutedEventArgs e)
         {

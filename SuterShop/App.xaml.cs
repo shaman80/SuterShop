@@ -43,10 +43,13 @@ namespace SuterShop
 
         public delegate void UpdateShopDelegate();
         public UpdateShopDelegate GoodItemCountChanged { get; set; }
+
+        public delegate void СheckingLifeTimeDelegate();
+        public СheckingLifeTimeDelegate СheckingLifeTime { get; set; }
         public App()
         {
-            _cs = "Server=localhost;Database=shop2;Uid=root;Pwd=1q2w3e;";
-            //_cs = "Server=192.168.88.54;Database=shop2;Uid=root;Pwd=1q2w3e;";
+            //_cs = "Server=localhost;Database=shop2;Uid=root;Pwd=1q2w3e;";
+            _cs = "Server=192.168.88.54;Database=shop2;Uid=root;Pwd=1q2w3e;";
             Db = new DataBaseContext(_cs);
            // Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();
@@ -89,5 +92,7 @@ namespace SuterShop
         {
             (MainWindow.DataContext as MainWindowViewModel).filterCentral(categoriesFilter);
         }
+
+        
     }
 }

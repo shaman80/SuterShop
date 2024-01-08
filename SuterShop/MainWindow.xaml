@@ -61,7 +61,8 @@
             <TextBlock Text="{Binding CurrentUser.FullName, UpdateSourceTrigger=PropertyChanged}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Margin="5,5,100,5"/>
+                       Margin="5,5,200,5"
+                       FontSize="20"/>
 
         </Grid>
         <UserControl Grid.Column="0" 
