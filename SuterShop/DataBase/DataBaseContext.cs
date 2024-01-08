@@ -81,7 +81,7 @@ namespace SuterShop
     public class UserGuid
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public int UserId { get; set; }
         public Guid Guid { get; set; }
         public DateTime LifeTime { get; set; }
 

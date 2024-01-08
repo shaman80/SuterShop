@@ -64,7 +64,7 @@ namespace SuterShop
 
             if ((guid?.Guid == userGuidJson.Guid) && time.Minutes < 5)
             {
-                (Application.Current as IApp).CurrentUser = userGuidJson.User;
+                (Application.Current as IApp).CurrentUser = db.Users.Find(userGuidJson.UserId);
                 guid.LifeTime = DateTime.Now;
                 db.SaveChanges();
             }
@@ -86,7 +86,7 @@ namespace SuterShop
             {
                 var userGuid = new UserGuid
                 {
-                    User = (Application.Current as IApp).CurrentUser,
+                    UserId = (Application.Current as IApp).CurrentUser.Id,
                     Guid = Guid.NewGuid(),
                     LifeTime = DateTime.Now
                 };
