@@ -4,20 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SuterShop.GoodInfo
 {
-    public partial class GoodInfoControlViewModel : ObservableObject
+    public partial class GoodInfoWindowViewModel : ObservableObject
     {
         [ObservableProperty] private Goods good;
 
-        public GoodInfoControlViewModel()
+        public GoodInfoWindowViewModel()
         {
 
         }
-        public GoodInfoControlViewModel(Goods goods)
+        
+        public void SetData(Goods g)
         {
-            good = goods;
+            Good = g;
         }
     }
 }

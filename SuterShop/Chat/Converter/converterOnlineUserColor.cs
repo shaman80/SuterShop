@@ -15,7 +15,7 @@ namespace SuterShop.Chat.Converter
         {
             foreach(var item in (Application.Current as IApp).Db.OnlineUsers)
             {
-                if (item.user.Id.ToString() == value.ToString()) return "Lime";
+                if (item.user?.Id.ToString() == value.ToString()) return "Lime";
             }
             return "red";
         }

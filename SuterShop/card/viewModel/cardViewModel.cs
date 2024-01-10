@@ -1,4 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SuterShop.GoodInfo;
+using SuterShop.GoodInfo.View;
+using SuterShop.LeftPanel.View;
+using SuterShop.LeftPanel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +45,13 @@ namespace SuterShop.card.viewModel
             _goods.Remove(goodForSale);
             _db.GoodsForSaleList.Remove(goodForSale);
             _db.SaveChanges();
+        }
+
+        internal void OpenDescription()
+        {
+            var goodInfoView = new GoodsInfoWindow();
+            (goodInfoView.DataContext as GoodInfoWindowViewModel)!.SetData(good);
+            goodInfoView.ShowDialog();
         }
     }
 }

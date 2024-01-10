@@ -56,7 +56,7 @@ namespace SuterShop.CentralPanel.View
                 }
 
                 var image = new Image();
-                image.Source = new BitmapImage(new Uri($"pack://application:,,,{dir}{fileName}"));
+                //image.Source = new BitmapImage(new Uri($"pack://application:,,,{dir}{fileName}"));
 
 
                 var card = new cardView();

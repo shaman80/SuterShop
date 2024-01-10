@@ -45,7 +45,7 @@ namespace SuterShop.card.view
 
         private void OpenDescription(object sender, RoutedEventArgs e)
         {
-
+            (DataContext as cardViewModel).OpenDescription();
         }
 
 

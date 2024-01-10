@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuterShop.GoodInfo.View" xmlns:goodinfo="clr-namespace:SuterShop.GoodInfo"
         mc:Ignorable="d"
-        Title="GoodsInfoWindow" Height="450" Width="800">
+        Title="Информация о товаре" Height="400" Width="800">
     <Window.DataContext>
-        <goodinfo:GoodInfoControlViewModel/>
+        <goodinfo:GoodInfoWindowViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +26,7 @@
         </Grid.ColumnDefinitions>
 
         <Image Grid.RowSpan="6" Grid.Column="0" Grid.Row="1"  />
-        <Label Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Content="Информация о товаре:" FontSize="36" HorizontalAlignment="Center"/>
+        <Label Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Content="Информация о товаре:" FontSize="30" HorizontalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="1" Content="Название:" VerticalAlignment="Center" FontSize="24" />
         <Label Grid.Column="1" Grid.Row="3" Content="Категория:" VerticalAlignment="Center" FontSize="24" />
         <Label Grid.Column="1" Grid.Row="4" Content="Продавец:" VerticalAlignment="Center" FontSize="24" />
@@ -34,14 +34,17 @@
         <Label Grid.Column="1" Grid.Row="1" Content="Название:" VerticalAlignment="Center" FontSize="24" />
         <Label Grid.Column="1" Grid.Row="2" Content="Описание:" VerticalAlignment="Center" FontSize="24" />
 
-        <Label Grid.Column="2" Grid.Row="1" Content="" VerticalAlignment="Center" FontSize="24" />
-        <Label Grid.Column="2" Grid.Row="2" Content="" VerticalAlignment="Center" FontSize="24" />
-        <Label Grid.Column="2" Grid.Row="3" Content="" VerticalAlignment="Center" FontSize="24" />
-        <Label Grid.Column="2" Grid.Row="4" Content="" VerticalAlignment="Center" FontSize="24" />
+        <Label Grid.Column="2" Grid.Row="1" Content="{Binding Good.Name}" VerticalAlignment="Center" FontSize="24" />
+        <Label Grid.Column="2" Grid.Row="2" Content="{Binding Good.Description}" VerticalAlignment="Center" FontSize="24" />
+        <Label Grid.Column="2" Grid.Row="3" Content="{Binding Good.Category.Name}" VerticalAlignment="Center" FontSize="24" />
+        <Label Grid.Column="2" Grid.Row="4" Content="{Binding Good.User.Login}" VerticalAlignment="Center" FontSize="24" />
+        <Label Grid.Column="2" Grid.Row="5" Content="{Binding Good.Count}" VerticalAlignment="Center" FontSize="24" />
 
 
-        <Label Grid.Column="0" Grid.Row="6" Content="1000" FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="6" Content="{Binding Good.Price}" FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Center" />
         <Label Grid.Column="1" Grid.Row="6" Content="руб" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Image  Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Source="{Binding Good.Image}" Stretch="UniformToFill" Margin="10"/>
 
         <Button Width="150" Height="40" Grid.Row="6" Grid.Column ="2" Content="Купить" FontSize="30"/>
     </Grid>

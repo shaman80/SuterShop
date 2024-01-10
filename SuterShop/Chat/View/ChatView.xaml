@@ -23,8 +23,8 @@
                         <Border Margin="15,0,15,10" CornerRadius="16" Background="{Binding user.Id, Converter={StaticResource  backgroundUserChatConverter} }" Padding="10">
                             <StackPanel Orientation="Vertical" >
                                 <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="#582C0B" Visibility="{Binding user.Id,Converter={StaticResource nameConverter}}"/>
                                     <Ellipse Width="5" Height="5" Fill="{Binding user.Id, Converter={StaticResource  OnlineUser} }"/>
+                                    <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="#582C0B" Visibility="{Binding user.Id,Converter={StaticResource nameConverter}}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Margin="5" TextWrapping="Wrap" Width="200" Text="{Binding text}"/>
