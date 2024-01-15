@@ -49,10 +49,15 @@ namespace SuterShop.ViewModel
             Thread.Sleep(1000);
             _timer = new Timer(TimerTick, null, 0, 60000);
             (Application.Current as IApp).СheckingLifeTime += СheckingLifeTime;
-           
+
+            (Application.Current as IApp).UserIsLogining += UserIsLogining;
         }
 
-  
+        private void UserIsLogining(User user)
+        {
+           CurrentUser = user;
+        }
+
         private void СheckingLifeTime()
         {
             Application.Current.Dispatcher.Invoke(() => {
@@ -125,7 +130,7 @@ namespace SuterShop.ViewModel
                 _logoutBtn.Visibility = Visibility.Visible;
                 _openAdminPanelBtn.Visibility = Visibility.Visible;
             }
-            CurrentUser = (Application.Current as IApp).CurrentUser;
+            //CurrentUser = (Application.Current as IApp).CurrentUser;
         }
     }
 }
