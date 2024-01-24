@@ -31,17 +31,23 @@ namespace SuterShop.Chat
             (DataContext as ChatViewModel).AddMessage(BoxMessage.Text);
             BoxMessage.Text = "";
         }
-
+   
         private void TextChanged(object sender, RoutedEventArgs e)
         {
-            if(BoxMessage.Text.ToString().Length < 4 || (Application.Current as IApp).CurrentUser == null)
+            if( (Application.Current as IApp).CurrentUser != null)
             {
-                MessageButton.IsEnabled = false;
+
+                MessageButton.IsEnabled = true; 
             }
             else
             {
-                MessageButton.IsEnabled = true;
+                MessageButton.IsEnabled = false;
             }
+        }
+
+        private void BoxMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && MessageButton.IsEnabled) SendMessage(sender,e);
         }
     }
 }

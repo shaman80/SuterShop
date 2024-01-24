@@ -14,7 +14,7 @@ namespace SuterShop.Chat.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            return value.ToString() == (Application.Current as IApp).CurrentUser?.Id.ToString() ? "#eeffde" : "#defdff";
+            return value.ToString() == (Application.Current as IApp).CurrentUser?.Id.ToString() ? "#eeffde" : "#222222";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

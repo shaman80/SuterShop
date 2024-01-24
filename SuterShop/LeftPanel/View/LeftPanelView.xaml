@@ -9,16 +9,29 @@
     <UserControl.DataContext>
         <viewmodel:LeftPanelViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="HighlightStyle" TargetType="TextBlock">
+            <Setter Property="Background" Value="#6f6f71"/>
+
+        </Style>
+    </UserControl.Resources>
+    
+        
     <StackPanel Orientation="Vertical">
+        <TextBlock Margin="5" Padding="3" Text="Категории" FontSize="15"/>
         <ItemsControl ItemsSource="{Binding Categoryes, UpdateSourceTrigger=PropertyChanged}">
             <ItemsControl.ItemTemplate>
+                
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Width="150" Text="{Binding Name}" MouseDown="Click" Background="#FFFFFF"/>
+                        <TextBlock Margin="5" Width="150" Padding="3" Text="{Binding Name}" MouseDown="Click" Style="{DynamicResource TextBlockStyle}">
+                            
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
     </StackPanel>
+    
 </UserControl>

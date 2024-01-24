@@ -50,7 +50,7 @@ namespace SuterShop
         private string cs;
         public App()
         {
-            cs = "Server=192.168.88.54;Database=sfy;Uid=root;Pwd=1q2w3e;";
+            cs = "Server=127.0.0.1;Database=sfy;Uid=root;Pwd=qwerty;";
             Db = new DataBaseContext(cs);
            // Db.Database.EnsureDeleted();
             Db.Database.EnsureCreated();

@@ -14,8 +14,11 @@
         <converter:dataConverter x:Key="dataConverter"/>
         <converter:nameConverter x:Key="nameConverter"/>
         <converter:converterOnlineUserColor x:Key="OnlineUser"/>
+
+
     </UserControl.Resources>
-    <ScrollViewer x:Name="scroll">
+    <ScrollViewer x:Name="scroll" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical" >
             <ItemsControl ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
@@ -23,7 +26,7 @@
                         <Border Margin="15,0,15,10" CornerRadius="16" Background="{Binding user.Id, Converter={StaticResource  backgroundUserChatConverter} }" Padding="10">
                             <StackPanel Orientation="Vertical" >
                                 <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="#582C0B" Visibility="{Binding user.Id,Converter={StaticResource nameConverter}}"/>
+                                    <TextBlock Margin="5" Width="100" Text="{Binding user.Login}" Foreground="#7d92a1" Visibility="{Binding user.Id,Converter={StaticResource nameConverter}}"/>
                                     <Ellipse Width="5" Height="5" Fill="{Binding user.Id, Converter={StaticResource  OnlineUser} }"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
@@ -31,16 +34,16 @@
                                 </StackPanel>
                                 <TextBlock HorizontalAlignment="Right"  Text="{Binding data, Converter={StaticResource  dataConverter} }"/>
                             </StackPanel>
-                            
+
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" HorizontalAlignment="Center">
-                <Border CornerRadius="12" Background="LightGray">
-                    <TextBox Name ="BoxMessage" TextWrapping="Wrap" Width="150" Height="40" SelectionChanged="TextChanged"/>
+            <StackPanel Orientation="Horizontal" Margin="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="20">
+                <Border CornerRadius="12" BorderThickness="1" Background="LightGray">
+                    <TextBox Name ="BoxMessage" TextWrapping="Wrap" MinWidth="150" Height="40" SelectionChanged="TextChanged" KeyDown="BoxMessage_KeyDown"/>
                 </Border>
-                <Border CornerRadius="50" Background="LightGray">
+                <Border CornerRadius="50" BorderThickness="1" Background="LightGray">
                     <Button Width="40" Content="send" Height="40" Click="SendMessage" Name ="MessageButton" IsEnabled="False"/>
                 </Border>
             </StackPanel>

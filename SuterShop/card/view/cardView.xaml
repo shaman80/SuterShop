@@ -4,41 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SuterShop.card.view" xmlns:local1="clr-namespace:SuterShop.card.viewModel"
-             mc:Ignorable="d" BorderBrush="Black" BorderThickness="1" >
+             mc:Ignorable="d"  Style="{DynamicResource UserStyle}">
+    
     <UserControl.DataContext>
         <local1:cardViewModel></local1:cardViewModel>
+        
     </UserControl.DataContext>
+    
+    <Border 
+    CornerRadius="15"
+    BorderThickness="1"
+    Padding="1"
+    BorderBrush="#282929" Style="{DynamicResource BorderStyle}">
+     
+        <StackPanel Margin="5" Orientation="Vertical">
 
-    <StackPanel Margin="5" Orientation="Vertical">
+            <Button Name="EditGoodsItem"  
+            Visibility="Hidden"
+            Click="EditGoodsItemClick"
+            Content="Редактировать" 
+            HorizontalAlignment="Center"/>
+            <Label Content="{Binding Good.Name}" HorizontalAlignment="Center" Style="{DynamicResource LabelStyle}"></Label>
+            <Image Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" 
+           Width="90" Height="90" 
+           Stretch="UniformToFill"
+           MouseRightButtonDown="RightButtonClick"
+           Margin="10">
+            </Image>
+            <Label Content="{Binding Good.Description, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{DynamicResource LabelStyle}"></Label>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="+" 
+                Click="AddToCard" 
+                Width="50" 
+                Margin="5" 
+                Grid.Column="0"
+                Style="{DynamicResource btn}"/>
+                <Button Content="..." 
+                Click="OpenDescription" 
+                Width="50" 
+                Margin="5" 
+                HorizontalAlignment="Center"
+                Style="{DynamicResource btn}"/>
+            </StackPanel>
 
-        <Button Name="EditGoodsItem"  
-                Visibility="Hidden"
-                Click="EditGoodsItemClick"
-                Content="Редактировать" 
-                HorizontalAlignment="Center"/>
-        <Label Content="{Binding Good.Name}" HorizontalAlignment="Center"></Label>
-        <Image Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" 
-               Width="90" Height="90" 
-               Stretch="UniformToFill"
-               MouseRightButtonDown="RightButtonClick"
-               Margin="10">
-        </Image>
-        <Label Content="Описание:" HorizontalAlignment="Center"></Label>
-        <Label Content="{Binding Good.Description, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></Label>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="+" 
-                    Click="AddToCard" 
-                    Width="50" 
-                    Margin="5" 
-                    Grid.Column="0"/>
-            <Button Content="О товаре" 
-                    Click="OpenDescription" 
-                    Width="50" 
-                    Margin="5" 
-                    HorizontalAlignment="Center"/>
         </StackPanel>
-
-    </StackPanel>
+    </Border>
+    
 
 
 </UserControl>
